@@ -23,7 +23,7 @@ class BaseViewController: UIViewController {
         let backgroundView = UIImageView(image: image)
         
         self.view.addSubview(backgroundView)
-        backgroundView.snp.makeConstraints { (make) -> Void in
+        backgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
