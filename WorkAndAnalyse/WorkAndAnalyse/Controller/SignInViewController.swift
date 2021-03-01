@@ -15,7 +15,14 @@ class SignInViewController: ScrollableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.isNavigationBarHidden = true
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Configure views
@@ -26,6 +33,7 @@ class SignInViewController: ScrollableViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
     let passwordTextField: UITextField = {
         let textField = StyledTextField()
         textField.isSecureTextEntry = true
@@ -48,6 +56,8 @@ class SignInViewController: ScrollableViewController {
         button.setTitleColor(.white, for: .normal)
         button.contentHorizontalAlignment = .left
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(signUpTap), for: .touchUpInside)
         return button
     }()
     
@@ -137,5 +147,13 @@ class SignInViewController: ScrollableViewController {
             make.width.equalTo(centerStackView)
             make.height.equalTo(emailTextField.snp.height).offset(10)
         }
+    }
+    
+    // MARK: - Navigation
+    
+    @objc private func signUpTap() {
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

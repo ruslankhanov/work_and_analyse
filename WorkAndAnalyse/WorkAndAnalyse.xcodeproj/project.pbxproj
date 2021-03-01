@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A53FCAC822D139B05CECBE7 /* Pods_WorkAndAnalyse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593EC2321DA10D43C5D392B9 /* Pods_WorkAndAnalyse.framework */; };
 		ED38745B25EBFDB5007D9A38 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */; };
+		ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */; };
 		ED4ADB3F25E7EE1F00935A90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ADB3E25E7EE1F00935A90 /* AppDelegate.swift */; };
 		ED4ADB4125E7EE1F00935A90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ADB4025E7EE1F00935A90 /* SceneDelegate.swift */; };
 		ED4ADB4625E7EE1F00935A90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4ADB4425E7EE1F00935A90 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		8BCB4673C8A17830129CDCF0 /* Pods-WorkAndAnalyse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkAndAnalyse.release.xcconfig"; path = "Target Support Files/Pods-WorkAndAnalyse/Pods-WorkAndAnalyse.release.xcconfig"; sourceTree = "<group>"; };
 		AA4AC0699D9E47C29C1B1747 /* Pods-WorkAndAnalyse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkAndAnalyse.debug.xcconfig"; path = "Target Support Files/Pods-WorkAndAnalyse/Pods-WorkAndAnalyse.debug.xcconfig"; sourceTree = "<group>"; };
 		ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
+		ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		ED4ADB3B25E7EE1F00935A90 /* WorkAndAnalyse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkAndAnalyse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4ADB3E25E7EE1F00935A90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED4ADB4025E7EE1F00935A90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				ED4F875825E7F033008117AB /* BaseViewController.swift */,
 				ED4FA66125E8317400C6E04D /* SignInViewController.swift */,
 				ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */,
+				ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				ED4FA65D25E82EF200C6E04D /* CustomFonts.swift in Sources */,
 				ED4FA66225E8317400C6E04D /* SignInViewController.swift in Sources */,
 				ED4FA66525E8C92A00C6E04D /* StyledTextField.swift in Sources */,
+				ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */,
 				ED4FA67925E8E49000C6E04D /* UIColor+Ext.swift in Sources */,
 				ED4FA68125E8EB1E00C6E04D /* CustomColors.swift in Sources */,
 				ED4FA67E25E8E6D900C6E04D /* StyledButton.swift in Sources */,
