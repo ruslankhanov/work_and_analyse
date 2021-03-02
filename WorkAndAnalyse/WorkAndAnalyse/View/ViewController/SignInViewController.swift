@@ -10,6 +10,8 @@ import SnapKit
 
 class SignInViewController: ScrollableViewController {
     
+    var onFinishSignUp: (() -> Void)?
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

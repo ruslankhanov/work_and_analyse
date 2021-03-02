@@ -10,6 +10,7 @@
 		8A53FCAC822D139B05CECBE7 /* Pods_WorkAndAnalyse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593EC2321DA10D43C5D392B9 /* Pods_WorkAndAnalyse.framework */; };
 		ED38745B25EBFDB5007D9A38 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */; };
 		ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */; };
+		ED38746225ED576E007D9A38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED38746125ED576E007D9A38 /* GoogleService-Info.plist */; };
 		ED4ADB3F25E7EE1F00935A90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ADB3E25E7EE1F00935A90 /* AppDelegate.swift */; };
 		ED4ADB4125E7EE1F00935A90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ADB4025E7EE1F00935A90 /* SceneDelegate.swift */; };
 		ED4ADB4625E7EE1F00935A90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4ADB4425E7EE1F00935A90 /* Main.storyboard */; };
@@ -27,6 +28,9 @@
 		ED4FA67925E8E49000C6E04D /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA67825E8E49000C6E04D /* UIColor+Ext.swift */; };
 		ED4FA67E25E8E6D900C6E04D /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA67D25E8E6D900C6E04D /* StyledButton.swift */; };
 		ED4FA68125E8EB1E00C6E04D /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA68025E8EB1E00C6E04D /* CustomColors.swift */; };
+		ED5FEFBB25EE88A3004581EF /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5FEFBA25EE88A3004581EF /* RegistrationService.swift */; };
+		ED5FEFC225EE9B26004581EF /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5FEFC125EE9B26004581EF /* UserViewModel.swift */; };
+		ED5FEFC725EE9BEF004581EF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5FEFC625EE9BEF004581EF /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,7 @@
 		AA4AC0699D9E47C29C1B1747 /* Pods-WorkAndAnalyse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkAndAnalyse.debug.xcconfig"; path = "Target Support Files/Pods-WorkAndAnalyse/Pods-WorkAndAnalyse.debug.xcconfig"; sourceTree = "<group>"; };
 		ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		ED38746125ED576E007D9A38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED4ADB3B25E7EE1F00935A90 /* WorkAndAnalyse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkAndAnalyse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4ADB3E25E7EE1F00935A90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED4ADB4025E7EE1F00935A90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +59,9 @@
 		ED4FA67825E8E49000C6E04D /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		ED4FA67D25E8E6D900C6E04D /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		ED4FA68025E8EB1E00C6E04D /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		ED5FEFBA25EE88A3004581EF /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
+		ED5FEFC125EE9B26004581EF /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		ED5FEFC625EE9BEF004581EF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,21 +114,25 @@
 		ED4ADB3D25E7EE1F00935A90 /* WorkAndAnalyse */ = {
 			isa = PBXGroup;
 			children = (
+				ED5FEFC525EE9BE2004581EF /* Model */,
+				ED5FEFC025EE9AD8004581EF /* ViewModel */,
+				ED5FEFBD25EE99AB004581EF /* View */,
+				ED5FEFB525EDA58C004581EF /* Service */,
 				ED4FA67725E8E41200C6E04D /* Extension */,
 				ED4FA66A25E8DC9E00C6E04D /* Resources */,
 				ED4FA65B25E82ECF00C6E04D /* Helpers */,
-				ED4F875725E7F003008117AB /* Controller */,
 				ED4ADB3E25E7EE1F00935A90 /* AppDelegate.swift */,
 				ED4ADB4025E7EE1F00935A90 /* SceneDelegate.swift */,
 				ED4ADB4425E7EE1F00935A90 /* Main.storyboard */,
 				ED4ADB4725E7EE2100935A90 /* Assets.xcassets */,
 				ED4ADB4925E7EE2100935A90 /* LaunchScreen.storyboard */,
 				ED4ADB4C25E7EE2100935A90 /* Info.plist */,
+				ED38746125ED576E007D9A38 /* GoogleService-Info.plist */,
 			);
 			path = WorkAndAnalyse;
 			sourceTree = "<group>";
 		};
-		ED4F875725E7F003008117AB /* Controller */ = {
+		ED4F875725E7F003008117AB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				ED4F875825E7F033008117AB /* BaseViewController.swift */,
@@ -128,7 +140,7 @@
 				ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */,
 				ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */,
 			);
-			path = Controller;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		ED4FA65B25E82ECF00C6E04D /* Helpers */ = {
@@ -176,6 +188,38 @@
 				ED4FA67D25E8E6D900C6E04D /* StyledButton.swift */,
 			);
 			path = "Custom View";
+			sourceTree = "<group>";
+		};
+		ED5FEFB525EDA58C004581EF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				ED5FEFBA25EE88A3004581EF /* RegistrationService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		ED5FEFBD25EE99AB004581EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED4F875725E7F003008117AB /* ViewController */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED5FEFC025EE9AD8004581EF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED5FEFC125EE9B26004581EF /* UserViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED5FEFC525EE9BE2004581EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED5FEFC625EE9BEF004581EF /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED4FA67025E8DC9E00C6E04D /* OpenSans-SemiBold.ttf in Resources */,
+				ED38746225ED576E007D9A38 /* GoogleService-Info.plist in Resources */,
 				ED4ADB4B25E7EE2100935A90 /* LaunchScreen.storyboard in Resources */,
 				ED4FA67225E8DC9E00C6E04D /* OpenSans-Bold.ttf in Resources */,
 				ED4FA67325E8DC9E00C6E04D /* OpenSans-Regular.ttf in Resources */,
@@ -297,11 +342,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED4F875925E7F033008117AB /* BaseViewController.swift in Sources */,
+				ED5FEFC225EE9B26004581EF /* UserViewModel.swift in Sources */,
 				ED38745B25EBFDB5007D9A38 /* ScrollableViewController.swift in Sources */,
 				ED4ADB3F25E7EE1F00935A90 /* AppDelegate.swift in Sources */,
 				ED4FA65D25E82EF200C6E04D /* CustomFonts.swift in Sources */,
 				ED4FA66225E8317400C6E04D /* SignInViewController.swift in Sources */,
+				ED5FEFBB25EE88A3004581EF /* RegistrationService.swift in Sources */,
 				ED4FA66525E8C92A00C6E04D /* StyledTextField.swift in Sources */,
+				ED5FEFC725EE9BEF004581EF /* User.swift in Sources */,
 				ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */,
 				ED4FA67925E8E49000C6E04D /* UIColor+Ext.swift in Sources */,
 				ED4FA68125E8EB1E00C6E04D /* CustomColors.swift in Sources */,

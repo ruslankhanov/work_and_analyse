@@ -8,6 +8,10 @@
 import UIKit
 
 class SignUpViewController: ScrollableViewController {
+    
+    var viewModel = UserViewModel()
+    
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +29,23 @@ class SignUpViewController: ScrollableViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
+    // MARK: - Navigation
+    
+    func transitionToHome() {
+        
+        //let homeViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     // MARK: - Configure views
+    
+    private let usernameTextField: UITextField = {
+        let textField = StyledTextField()
+        textField.setPlaceholder("Username")
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
     
     private let emailTextField: UITextField = {
         let textField = StyledTextField()
@@ -36,7 +56,7 @@ class SignUpViewController: ScrollableViewController {
     
     private let passwordTextField: UITextField = {
         let textField = StyledTextField()
-        textField.isSecureTextEntry = true
+        //textField.isSecureTextEntry = true
         textField.setPlaceholder("Password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -44,7 +64,7 @@ class SignUpViewController: ScrollableViewController {
     
     private let confirmPasswordTextField: UITextField = {
         let textField = StyledTextField()
-        textField.isSecureTextEntry = true
+        //textField.isSecureTextEntry = true
         textField.setPlaceholder("Confirm password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -55,7 +75,7 @@ class SignUpViewController: ScrollableViewController {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 15
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -64,10 +84,14 @@ class SignUpViewController: ScrollableViewController {
         let button = StyledFilledButton()
         button.setTitle("Create New Account", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(signUpTap), for: .touchUpInside)
+        
         return button
     }()
 
     private func setupViews() {
+        centerStackView.addArrangedSubview(usernameTextField)
         centerStackView.addArrangedSubview(emailTextField)
         centerStackView.addArrangedSubview(passwordTextField)
         centerStackView.addArrangedSubview(confirmPasswordTextField)
@@ -77,6 +101,10 @@ class SignUpViewController: ScrollableViewController {
         
         emailTextField.snp.makeConstraints{ make in
             make.height.equalTo(50)
+        }
+        
+        usernameTextField.snp.makeConstraints{ make in
+            make.height.equalTo(emailTextField.snp.height)
         }
         
         passwordTextField.snp.makeConstraints{ make in
@@ -100,5 +128,22 @@ class SignUpViewController: ScrollableViewController {
             make.width.equalTo(centerStackView)
             make.height.equalTo(emailTextField.snp.height).offset(10)
         }
+    }
+    
+    @objc private func signUpTap() {
+        if let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text, let passwordConfirmation = confirmPasswordTextField.text {
+            
+            viewModel.register(email: email, username: username, password: password, passwordConfirmation: passwordConfirmation) { [weak self] error in
+                self?.showSimpleAlert(title: "Message", message: error)
+            }
+        }
+    }
+    
+    private func showSimpleAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self.present(alert, animated: true)
     }
 }
