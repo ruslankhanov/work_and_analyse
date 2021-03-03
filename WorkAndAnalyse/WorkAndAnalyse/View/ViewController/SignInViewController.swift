@@ -10,7 +10,9 @@ import SnapKit
 
 class SignInViewController: ScrollableViewController {
     
-    var onFinishSignUp: (() -> Void)?
+    //var onFinishSignUp: (() -> Void)?
+    
+    var viewModel = UserViewModel()
     
     // MARK: - Lifecycle
     
@@ -48,6 +50,8 @@ class SignInViewController: ScrollableViewController {
         let button = StyledFilledButton()
         button.setTitle("Sign In", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(signInTap), for: .touchUpInside)
         return button
     }()
     
@@ -157,5 +161,22 @@ class SignInViewController: ScrollableViewController {
         let viewController = storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
         
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc private func signInTap() {
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            
+            viewModel.login(email: email, password: password) { [weak self] error in
+                self?.showSimpleAlert(title: "Message", message: error)
+            }
+        }
+    }
+    
+    private func showSimpleAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self.present(alert, animated: true)
     }
 }

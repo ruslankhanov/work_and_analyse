@@ -9,9 +9,10 @@ import UIKit
 
 class UserViewModel {
     
-    var onFinish: (() -> Void)?
+    //var onFinish: (() -> Void)?
     
     private let registrationService = RegistrationService()
+    private let loginService = LoginService()
     
     func register(email: String, username: String, password: String, passwordConfirmation: String, completion: @escaping ((_ error: String) -> Void)) {
         let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -25,7 +26,22 @@ class UserViewModel {
             switch result {
             case .failure(let error):
                 print(error)
-                return completion(error.localizedDescription.description)
+                return completion(error.localizedDescription)
+            case .success(()):
+                return completion("Success")
+            }
+        }
+    }
+    
+    func login(email: String, password: String, completion: @escaping ((_ error: String) -> Void)) {
+        let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        loginService.signIn(email: cleanEmail, password: cleanPassword) { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+                return completion(error.localizedDescription)
             case .success(()):
                 return completion("Success")
             }

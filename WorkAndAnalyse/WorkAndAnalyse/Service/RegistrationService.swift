@@ -21,11 +21,7 @@ class RegistrationService {
     }
     
     func signUp(user: User, passwordConfirmation: String, completion: @escaping (Result<(), RegistrationError>) -> Void) {
-        
-        /*
 
-        */
-        
         // Validate user data
         
         if let validationError = validateStrings(email: user.email, username: user.username, password: user.password, passwordConfirmation: passwordConfirmation) {
