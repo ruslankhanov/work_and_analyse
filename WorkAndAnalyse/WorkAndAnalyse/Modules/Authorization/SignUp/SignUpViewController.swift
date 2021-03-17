@@ -7,35 +7,48 @@
 
 import UIKit
 
-class SignUpViewController: ScrollableViewController {
+class SignUpViewController: ScrollableViewController, Storyboarded {
     
-    var viewModel = UserViewModel()
+    var finishSignUp: (() -> Void)?
+    var failSignUp: ((String) -> Void)?
+        
+    var viewModel: SignUpViewModel!
+    
+    private func setUpBindings() {
+        emailTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
+        confirmPasswordTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
+    }
+    
+    @objc private func credentialsChanged() {
+        viewModel.email = emailTextField.text ?? ""
+        viewModel.username = usernameTextField.text ?? ""
+        viewModel.password = passwordTextField.text ?? ""
+        viewModel.passwordConfirmation = passwordTextField.text ?? ""
+    }
+    
+    @objc private func signUpTap() {
+        viewModel.signUpTap()
+    }
     
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Sign Up"
         
         setupViews()
+        setUpBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
-    }
-    
-    // MARK: - Navigation
-    
-    func transitionToHome() {
-        
-        //let homeViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController
-        
-        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Configure views
@@ -129,21 +142,15 @@ class SignUpViewController: ScrollableViewController {
             make.height.equalTo(emailTextField.snp.height).offset(10)
         }
     }
+}
+
+extension SignUpViewController: SignUpDelegate {
     
-    @objc private func signUpTap() {
-        if let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text, let passwordConfirmation = confirmPasswordTextField.text {
-            
-            viewModel.register(email: email, username: username, password: password, passwordConfirmation: passwordConfirmation) { [weak self] error in
-                self?.showSimpleAlert(title: "Message", message: error)
-            }
-        }
+    func didSignUp() {
+        finishSignUp?()
     }
     
-    private func showSimpleAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-        self.present(alert, animated: true)
+    func didFailSignUp(message: String) {
+        failSignUp?(message)
     }
 }

@@ -8,11 +8,31 @@
 import UIKit
 import SnapKit
 
-class SignInViewController: ScrollableViewController {
+class SignInViewController: ScrollableViewController, Storyboarded {
     
-    //var onFinishSignUp: (() -> Void)?
+    var signUpAction: (() -> Void)?
+    var finishSignIn: (() -> Void)?
+    var failSignIn: ((String) -> Void)?
     
-    var viewModel = UserViewModel()
+    var viewModel: SignInViewModel!
+    
+    private func setUpBindings() {
+        emailTextField.addTarget(self, action: #selector(credentialsChanged), for: UIControl.Event.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(credentialsChanged), for: UIControl.Event.editingChanged)
+    }
+    
+    @objc private func credentialsChanged() {
+        viewModel.email = emailTextField.text ?? ""
+        viewModel.password = passwordTextField.text ?? ""
+    }
+    
+    @objc private func signUpTap() {
+        signUpAction?()
+    }
+    
+    @objc private func signInTap() {
+        viewModel.signInTap()
+    }
     
     // MARK: - Lifecycle
     
@@ -21,6 +41,7 @@ class SignInViewController: ScrollableViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         setupViews()
+        setUpBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,14 +52,14 @@ class SignInViewController: ScrollableViewController {
     
     // MARK: - Configure views
     
-    let emailTextField: UITextField = {
+    private let emailTextField: UITextField = {
         let textField = StyledTextField()
         textField.setPlaceholder("E-mail")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    let passwordTextField: UITextField = {
+    private let passwordTextField: UITextField = {
         let textField = StyledTextField()
         textField.isSecureTextEntry = true
         textField.setPlaceholder("Password")
@@ -46,7 +67,7 @@ class SignInViewController: ScrollableViewController {
         return textField
     }()
     
-    let signInButton: UIButton = {
+    private let signInButton: UIButton = {
         let button = StyledFilledButton()
         button.setTitle("Sign In", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +76,7 @@ class SignInViewController: ScrollableViewController {
         return button
     }()
     
-    let signUpButton: UIButton = {
+    private let signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = .none
@@ -67,7 +88,7 @@ class SignInViewController: ScrollableViewController {
         return button
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = CustomFonts.openSans(size: 40, style: .bold)
         label.text = "Hey,\nLogin Now."
@@ -78,7 +99,7 @@ class SignInViewController: ScrollableViewController {
         return label
     }()
     
-    let secondaryLabel: UILabel = {
+    private let secondaryLabel: UILabel = {
         let label = UILabel()
         label.font = CustomFonts.openSans(size: 16, style: .regular)
         label.text = "If you are new /"
@@ -88,7 +109,7 @@ class SignInViewController: ScrollableViewController {
         return label
     }()
     
-    let centerStackView: UIStackView = {
+    private let centerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -98,7 +119,7 @@ class SignInViewController: ScrollableViewController {
         return stackView
     }()
     
-    let topStackView: UIStackView = {
+    private let topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -154,29 +175,14 @@ class SignInViewController: ScrollableViewController {
             make.height.equalTo(emailTextField.snp.height).offset(10)
         }
     }
-    
-    // MARK: - Navigation
-    
-    @objc private func signUpTap() {
-        let viewController = storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-        
-        self.navigationController?.pushViewController(viewController, animated: true)
+}
+
+extension SignInViewController: SignInDelegate {
+    func didSignIn() {
+        finishSignIn?()
     }
     
-    @objc private func signInTap() {
-        if let email = emailTextField.text, let password = passwordTextField.text {
-            
-            viewModel.login(email: email, password: password) { [weak self] error in
-                self?.showSimpleAlert(title: "Message", message: error)
-            }
-        }
-    }
-    
-    private func showSimpleAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-        self.present(alert, animated: true)
+    func didFailSignIn(message: String) {
+        failSignIn?(message)
     }
 }

@@ -10,37 +10,33 @@ import Firebase
 
 class RegistrationService {
     
-    enum RegistrationError: Error {
-        case oneOrMoreValuesAreEmprty
-        case passwordsDontMatch
-        case invalidPassword
+    func signUp(email: String, username: String, password: String, passwordConfirmation: String, completion: @escaping ((AuthorizationResponse) -> Void)) {
         
-        case cannotCreateUser(Error)
-        case cannotGetUID
-        case cannotSaveUserData(Error)
-    }
-    
-    func signUp(user: User, passwordConfirmation: String, completion: @escaping (Result<(), RegistrationError>) -> Void) {
+        let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanUsername = username.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanPasswordConfirmation = passwordConfirmation.trimmingCharacters(in: .whitespacesAndNewlines)
 
         // Validate user data
         
-        if let validationError = validateStrings(email: user.email, username: user.username, password: user.password, passwordConfirmation: passwordConfirmation) {
+        if let validationError = validateStrings(email: cleanEmail, username: cleanUsername, password: cleanPassword, passwordConfirmation: cleanPasswordConfirmation) {
             
-            return completion(.failure(validationError))
+            return completion(.failure(message: validationError.localizedDescription))
         }
         
         // Registrate with e-mail and password
         
-        Auth.auth().createUser(withEmail: user.email, password: user.password) { (result, err) in
+        Auth.auth().createUser(withEmail: cleanEmail, password: cleanPassword) { (result, err) in
             guard err == nil else {
-                return completion(.failure(.cannotCreateUser(err!)))
+                return completion(.failure(message: AuthorizationError.authError(err!).localizedDescription))
             }
             
+            // TODO: Write user data to database
+            /*
+             
             guard let uid = result?.user.uid else {
-                return completion(.failure(.cannotGetUID))
+                return completion(.failure(.cannotGetUID(message: "Can not get UID.")))
             }
-            
-            // Write user data to database
             
             let db = Firestore.firestore()
             
@@ -49,13 +45,12 @@ class RegistrationService {
                     return completion(.failure(.cannotSaveUserData(error)))
                 }
             }
+            */
+            return completion(.success)
         }
-        
-        return completion(.success(()))
-        
     }
     
-    fileprivate func validateStrings(email: String, username: String, password: String, passwordConfirmation: String) -> RegistrationError? {
+    fileprivate func validateStrings(email: String, username: String, password: String, passwordConfirmation: String) -> AuthorizationError? {
         
         if email == "" || username == "" || password == "" || passwordConfirmation == "" {
             return .oneOrMoreValuesAreEmprty
@@ -78,3 +73,5 @@ class RegistrationService {
         return passwordTest.evaluate(with: password)
     }
 }
+
+
