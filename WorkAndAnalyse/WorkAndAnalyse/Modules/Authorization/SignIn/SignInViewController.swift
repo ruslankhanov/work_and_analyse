@@ -8,52 +8,15 @@
 import UIKit
 import SnapKit
 
-class SignInViewController: ScrollableViewController, Storyboarded {
+class SignInViewController: ScrollableViewController {
     
-    var signUpAction: (() -> Void)?
-    var finishSignIn: (() -> Void)?
-    var failSignIn: ((String) -> Void)?
+    // MARK: - Vars & Lets
     
-    var viewModel: SignInViewModel!
-    
-    private func setUpBindings() {
-        emailTextField.addTarget(self, action: #selector(credentialsChanged), for: UIControl.Event.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(credentialsChanged), for: UIControl.Event.editingChanged)
-    }
-    
-    @objc private func credentialsChanged() {
-        viewModel.email = emailTextField.text ?? ""
-        viewModel.password = passwordTextField.text ?? ""
-    }
-    
-    @objc private func signUpTap() {
-        signUpAction?()
-    }
-    
-    @objc private func signInTap() {
-        viewModel.signInTap()
-    }
-    
-    // MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navigationController?.isNavigationBarHidden = true
-        setupViews()
-        setUpBindings()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
-    // MARK: - Configure views
+    var viewModel: (SignInViewModelProtocol & SignInOutput)!
     
     private let emailTextField: UITextField = {
         let textField = StyledTextField()
+        textField.setStyle(style: .outline)
         textField.setPlaceholder("E-mail")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -62,17 +25,18 @@ class SignInViewController: ScrollableViewController, Storyboarded {
     private let passwordTextField: UITextField = {
         let textField = StyledTextField()
         textField.isSecureTextEntry = true
+        textField.setStyle(style: .outline)
         textField.setPlaceholder("Password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    private let signInButton: UIButton = {
-        let button = StyledFilledButton()
+    private let signInButton: StyledButton = {
+        var button = StyledButton()
         button.setTitle("Sign In", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
+        button.setStyle(style: .filled)
         button.addTarget(self, action: #selector(signInTap), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -82,9 +46,8 @@ class SignInViewController: ScrollableViewController, Storyboarded {
         button.backgroundColor = .none
         button.setTitleColor(.white, for: .normal)
         button.contentHorizontalAlignment = .left
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
         button.addTarget(self, action: #selector(signUpTap), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -128,6 +91,24 @@ class SignInViewController: ScrollableViewController, Storyboarded {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
+        setupViews()
+        setUpBindings()        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    // MARK: - View methods
     
     private func setupViews() {
         centerStackView.addArrangedSubview(emailTextField)
@@ -175,14 +156,25 @@ class SignInViewController: ScrollableViewController, Storyboarded {
             make.height.equalTo(emailTextField.snp.height).offset(10)
         }
     }
-}
-
-extension SignInViewController: SignInDelegate {
-    func didSignIn() {
-        finishSignIn?()
+    
+    // MARK: - ViewModel methods
+    
+    private func setUpBindings() {
+        emailTextField.addTarget(self, action: #selector(credentialsChanged), for: UIControl.Event.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(credentialsChanged), for: UIControl.Event.editingChanged)
+        
     }
     
-    func didFailSignIn(message: String) {
-        failSignIn?(message)
+    @objc private func credentialsChanged() {
+        viewModel.email = emailTextField.text ?? ""
+        viewModel.password = passwordTextField.text ?? ""
+    }
+    
+    @objc private func signUpTap() {
+        viewModel.signUpTap()
+    }
+    
+    @objc private func signInTap() {
+        viewModel.signInTap()
     }
 }

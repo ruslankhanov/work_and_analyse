@@ -7,54 +7,15 @@
 
 import UIKit
 
-class SignUpViewController: ScrollableViewController, Storyboarded {
+class SignUpViewController: ScrollableViewController {
     
-    var finishSignUp: (() -> Void)?
-    var failSignUp: ((String) -> Void)?
-        
-    var viewModel: SignUpViewModel!
+    // MARK: - Vars & Lets
     
-    private func setUpBindings() {
-        emailTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
-        usernameTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
-        confirmPasswordTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
-    }
-    
-    @objc private func credentialsChanged() {
-        viewModel.email = emailTextField.text ?? ""
-        viewModel.username = usernameTextField.text ?? ""
-        viewModel.password = passwordTextField.text ?? ""
-        viewModel.passwordConfirmation = passwordTextField.text ?? ""
-    }
-    
-    @objc private func signUpTap() {
-        viewModel.signUpTap()
-    }
-    
-    // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.prefersLargeTitles = true
-        title = "Sign Up"
-        
-        setupViews()
-        setUpBindings()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = false
-    }
-    
-    // MARK: - Configure views
+    var viewModel: (SignUpViewModelProtocol & SignUpOutput)!
     
     private let usernameTextField: UITextField = {
         let textField = StyledTextField()
+        textField.setStyle(style: .outline)
         textField.setPlaceholder("Username")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -62,6 +23,7 @@ class SignUpViewController: ScrollableViewController, Storyboarded {
     
     private let emailTextField: UITextField = {
         let textField = StyledTextField()
+        textField.setStyle(style: .outline)
         textField.setPlaceholder("E-mail")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -70,6 +32,7 @@ class SignUpViewController: ScrollableViewController, Storyboarded {
     private let passwordTextField: UITextField = {
         let textField = StyledTextField()
         //textField.isSecureTextEntry = true
+        textField.setStyle(style: .outline)
         textField.setPlaceholder("Password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -78,6 +41,7 @@ class SignUpViewController: ScrollableViewController, Storyboarded {
     private let confirmPasswordTextField: UITextField = {
         let textField = StyledTextField()
         //textField.isSecureTextEntry = true
+        textField.setStyle(style: .outline)
         textField.setPlaceholder("Confirm password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -94,15 +58,37 @@ class SignUpViewController: ScrollableViewController, Storyboarded {
     }()
     
     private let signUpButton: UIButton = {
-        let button = StyledFilledButton()
-        button.setTitle("Create New Account", for: .normal)
+        let button = StyledButton()
+        button.setTitle("Sign Up", for: .normal)
+        button.setStyle(style: .filled)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(signUpTap), for: .touchUpInside)
         
         return button
     }()
+    
+    // MARK: - Lifecycle
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Create New Account"
+        
+        setupViews()
+        setUpBindings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    // MARK: - View methods
+    
     private func setupViews() {
         centerStackView.addArrangedSubview(usernameTextField)
         centerStackView.addArrangedSubview(emailTextField)
@@ -142,15 +128,24 @@ class SignUpViewController: ScrollableViewController, Storyboarded {
             make.height.equalTo(emailTextField.snp.height).offset(10)
         }
     }
-}
-
-extension SignUpViewController: SignUpDelegate {
     
-    func didSignUp() {
-        finishSignUp?()
+    // MARK: - ViewModel methods
+    
+    private func setUpBindings() {
+        emailTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
+        confirmPasswordTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
     }
     
-    func didFailSignUp(message: String) {
-        failSignUp?(message)
+    @objc private func credentialsChanged() {
+        viewModel.email = emailTextField.text ?? ""
+        viewModel.username = usernameTextField.text ?? ""
+        viewModel.password = passwordTextField.text ?? ""
+        viewModel.passwordConfirmation = passwordTextField.text ?? ""
+    }
+    
+    @objc private func signUpTap() {
+        viewModel.signUpTap()
     }
 }

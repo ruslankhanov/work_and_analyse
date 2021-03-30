@@ -5,17 +5,30 @@
 //  Created by Ruslan Khanov on 16.03.2021.
 //
 
-protocol SignInDelegate: AnyObject {
-    func didSignIn()
-    func didFailSignIn(message: String)
+protocol SignInOutput {
+    var signUpAction: (() -> Void)? { get set }
+    var finishSignIn: (() -> Void)? { get set }
+    var failSignIn: ((String) -> Void)? { get set }
 }
 
-class SignInViewModel {
-    private let loginService: LoginService
-    weak var delegate: SignInDelegate?
+protocol SignInViewModelProtocol {
+    var email: String { get set }
+    var password: String { get set }
+    
+    func signInTap()
+    func signUpTap()
+}
+
+class SignInViewModel: SignInViewModelProtocol, SignInOutput {
+
+    var signUpAction: (() -> Void)?
+    var finishSignIn: (() -> Void)?
+    var failSignIn: ((String) -> Void)?
     
     var email = ""
     var password = ""
+    
+    private let loginService: LoginService
     
     init(loginService: LoginService) {
         self.loginService = loginService
@@ -25,10 +38,14 @@ class SignInViewModel {
         loginService.signIn(email: email, password: password) { [weak self] response in
             switch response {
             case .failure(let message):
-                self?.delegate?.didFailSignIn(message: message)
+                self?.failSignIn?(message)
             case .success:
-                self?.delegate?.didSignIn()
+                self?.finishSignIn?()
             }
         }
+    }
+    
+    func signUpTap() {
+        signUpAction?()
     }
 }

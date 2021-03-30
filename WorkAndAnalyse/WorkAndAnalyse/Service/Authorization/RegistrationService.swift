@@ -19,40 +19,45 @@ class RegistrationService {
 
         // Validate user data
         
-        if let validationError = validateStrings(email: cleanEmail, username: cleanUsername, password: cleanPassword, passwordConfirmation: cleanPasswordConfirmation) {
+        if let validationError = validateStrings(
+            email: cleanEmail,
+            username: cleanUsername, password: cleanPassword, passwordConfirmation: cleanPasswordConfirmation) {
             
-            return completion(.failure(message: validationError.localizedDescription))
+            completion(.failure(message: validationError.localizedDescription))
+            return
         }
         
         // Registrate with e-mail and password
         
         Auth.auth().createUser(withEmail: cleanEmail, password: cleanPassword) { (result, err) in
             guard err == nil else {
-                return completion(.failure(message: AuthorizationError.authError(err!).localizedDescription))
+                completion(.failure(message: AuthorizationError.authError(err!).localizedDescription))
+                return
             }
             
             // TODO: Write user data to database
-            /*
              
             guard let uid = result?.user.uid else {
-                return completion(.failure(.cannotGetUID(message: "Can not get UID.")))
+                return completion(.failure(message: "Cannot get user's uid."))
             }
             
             let db = Firestore.firestore()
             
-            db.collection("users").addDocument(data: [ "username": user.username, "uid": uid ]) { (error) in
-                if let error = error {
-                    return completion(.failure(.cannotSaveUserData(error)))
+            db.collection("users").document(uid).setData([
+                "username": cleanUsername
+            ]) { error in
+                if error != nil {
+                    return completion(.failure(message: "Cannot save user data"))
                 }
             }
-            */
-            return completion(.success)
+            
+            completion(.success)
         }
     }
     
     fileprivate func validateStrings(email: String, username: String, password: String, passwordConfirmation: String) -> AuthorizationError? {
         
-        if email == "" || username == "" || password == "" || passwordConfirmation == "" {
+        if email.isEmpty || username.isEmpty || password.isEmpty || passwordConfirmation == "" {
             return .oneOrMoreValuesAreEmprty
         }
         

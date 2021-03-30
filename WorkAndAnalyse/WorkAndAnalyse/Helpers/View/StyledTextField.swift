@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum StyledTextFieldStyle {
+    case outline
+    case normal
+}
+
 class StyledTextField: UITextField {
         
     let padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
@@ -23,12 +28,8 @@ class StyledTextField: UITextField {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = CustomColors.lightOrangeColor.cgColor
         self.layer.cornerRadius = 11.0
         self.layer.masksToBounds = true
-        self.backgroundColor = .none
-        self.textColor = .white
         self.autocapitalizationType = .none
         self.font = CustomFonts.openSans(size: 18, style: .regular)
         self.autocorrectionType = .no
@@ -36,5 +37,18 @@ class StyledTextField: UITextField {
     
     func setPlaceholder(_ text: String) {
         self.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+    }
+    
+    func setStyle(style: StyledTextFieldStyle) {
+        switch style {
+        case .outline:
+            self.layer.borderWidth = 1.0
+            self.layer.borderColor = CustomColors.lightOrangeColor.cgColor
+            self.backgroundColor = .none
+            self.textColor = .white
+        case .normal:
+            self.backgroundColor = .white
+            self.textColor = .black
+        }
     }
 }

@@ -5,20 +5,30 @@
 //  Created by Ruslan Khanov on 11.03.2021.
 //
 
-protocol SignUpDelegate: AnyObject {
-    func didSignUp()
-    func didFailSignUp(message: String)
+protocol SignUpOutput {
+    var finishSignUp: (() -> Void)? { get set }
+    var failSignUp: ((String) -> Void)? { get set }
 }
 
-class SignUpViewModel {
+protocol SignUpViewModelProtocol {
+    var email: String { get set }
+    var username: String { get set }
+    var password: String { get set }
+    var passwordConfirmation: String { get set }
     
-    private let registrationService: RegistrationService
-    weak var delegate: SignUpDelegate?
+    func signUpTap()
+}
+
+class SignUpViewModel: SignUpViewModelProtocol, SignUpOutput {
+    var finishSignUp: (() -> Void)?
+    var failSignUp: ((String) -> Void)?
     
     var email = ""
     var username = ""
     var password = ""
     var passwordConfirmation = ""
+    
+    private let registrationService: RegistrationService
     
     init(registrationService: RegistrationService) {
         self.registrationService = registrationService
@@ -28,9 +38,9 @@ class SignUpViewModel {
         registrationService.signUp(email: email, username: username, password: password, passwordConfirmation: passwordConfirmation) { [weak self] response in
             switch response {
             case .failure(let message):
-                self?.delegate?.didFailSignUp(message: message)
+                self?.failSignUp?(message)
             case .success:
-                self?.delegate?.didSignUp()
+                self?.finishSignUp?()
             }
         }
     }

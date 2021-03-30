@@ -8,8 +8,7 @@
 import UIKit
 
 class CustomColors {
-    
     static let lightOrangeColor = UIColor(rgb: 0xF2695B)
-    //UIColor(hue: 4/100, saturation: 67/100, brightness: 100/100, alpha: 1.0)
-
+    static let creamWhiteColor = UIColor(rgb: 0xF3E9E8)
+    static let lightBlackColor = UIColor(rgb: 0x181C27)
 }
