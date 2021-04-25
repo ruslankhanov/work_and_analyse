@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8A53FCAC822D139B05CECBE7 /* Pods_WorkAndAnalyse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593EC2321DA10D43C5D392B9 /* Pods_WorkAndAnalyse.framework */; };
-		ED2EBFB325EFDEC5005B7A1E /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2EBFB225EFDEC5005B7A1E /* LoginService.swift */; };
+		ED2EBFB325EFDEC5005B7A1E /* FirebaseLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2EBFB225EFDEC5005B7A1E /* FirebaseLoginService.swift */; };
 		ED362AB12611D9A7008DB051 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED362AB02611D9A7008DB051 /* MainTabBarController.swift */; };
-		ED362ABB26125401008DB051 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED362ABA26125401008DB051 /* MainTabBarCoordinator.swift */; };
-		ED362ABE26125413008DB051 /* MainTabBarViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED362ABD26125413008DB051 /* MainTabBarViewOutput.swift */; };
 		ED38745B25EBFDB5007D9A38 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */; };
 		ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */; };
 		ED38746225ED576E007D9A38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED38746125ED576E007D9A38 /* GoogleService-Info.plist */; };
@@ -23,6 +21,9 @@
 		ED4ADB4125E7EE1F00935A90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ADB4025E7EE1F00935A90 /* SceneDelegate.swift */; };
 		ED4ADB4825E7EE2100935A90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED4ADB4725E7EE2100935A90 /* Assets.xcassets */; };
 		ED4ADB4B25E7EE2100935A90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4ADB4925E7EE2100935A90 /* LaunchScreen.storyboard */; };
+		ED4D182C2613812C00F28495 /* AddSubtaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D182B2613812C00F28495 /* AddSubtaskViewController.swift */; };
+		ED4D18322613B97200F28495 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D18312613B97200F28495 /* LoginService.swift */; };
+		ED4D18352613B9B800F28495 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D18342613B9B800F28495 /* RegistrationService.swift */; };
 		ED4F875925E7F033008117AB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4F875825E7F033008117AB /* BaseViewController.swift */; };
 		ED4FA65D25E82EF200C6E04D /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA65C25E82EF200C6E04D /* CustomFonts.swift */; };
 		ED4FA66225E8317400C6E04D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA66125E8317400C6E04D /* SignInViewController.swift */; };
@@ -34,7 +35,7 @@
 		ED4FA67925E8E49000C6E04D /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA67825E8E49000C6E04D /* UIColor+Ext.swift */; };
 		ED4FA67E25E8E6D900C6E04D /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA67D25E8E6D900C6E04D /* StyledButton.swift */; };
 		ED4FA68125E8EB1E00C6E04D /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FA68025E8EB1E00C6E04D /* CustomColors.swift */; };
-		ED5FEFBB25EE88A3004581EF /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5FEFBA25EE88A3004581EF /* RegistrationService.swift */; };
+		ED5FEFBB25EE88A3004581EF /* FirebaseRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5FEFBA25EE88A3004581EF /* FirebaseRegistrationService.swift */; };
 		ED6AE3192607DEAD003D42A4 /* CustomButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6AE3182607DEAD003D42A4 /* CustomButtonCell.swift */; };
 		ED77B7C825F49FA1000BFF44 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED77B7C725F49FA1000BFF44 /* Coordinator.swift */; };
 		ED77B7CF25F4A19E000BFF44 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED77B7CE25F4A19E000BFF44 /* AuthCoordinator.swift */; };
@@ -63,10 +64,8 @@
 		593EC2321DA10D43C5D392B9 /* Pods_WorkAndAnalyse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WorkAndAnalyse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCB4673C8A17830129CDCF0 /* Pods-WorkAndAnalyse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkAndAnalyse.release.xcconfig"; path = "Target Support Files/Pods-WorkAndAnalyse/Pods-WorkAndAnalyse.release.xcconfig"; sourceTree = "<group>"; };
 		AA4AC0699D9E47C29C1B1747 /* Pods-WorkAndAnalyse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkAndAnalyse.debug.xcconfig"; path = "Target Support Files/Pods-WorkAndAnalyse/Pods-WorkAndAnalyse.debug.xcconfig"; sourceTree = "<group>"; };
-		ED2EBFB225EFDEC5005B7A1E /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		ED2EBFB225EFDEC5005B7A1E /* FirebaseLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoginService.swift; sourceTree = "<group>"; };
 		ED362AB02611D9A7008DB051 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		ED362ABA26125401008DB051 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
-		ED362ABD26125413008DB051 /* MainTabBarViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewOutput.swift; sourceTree = "<group>"; };
 		ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		ED38746125ED576E007D9A38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -80,6 +79,9 @@
 		ED4ADB4725E7EE2100935A90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED4ADB4A25E7EE2100935A90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED4ADB4C25E7EE2100935A90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED4D182B2613812C00F28495 /* AddSubtaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubtaskViewController.swift; sourceTree = "<group>"; };
+		ED4D18312613B97200F28495 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		ED4D18342613B9B800F28495 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		ED4F875825E7F033008117AB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		ED4FA65C25E82EF200C6E04D /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
 		ED4FA66125E8317400C6E04D /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +93,7 @@
 		ED4FA67825E8E49000C6E04D /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		ED4FA67D25E8E6D900C6E04D /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		ED4FA68025E8EB1E00C6E04D /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
-		ED5FEFBA25EE88A3004581EF /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
+		ED5FEFBA25EE88A3004581EF /* FirebaseRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRegistrationService.swift; sourceTree = "<group>"; };
 		ED6AE3182607DEAD003D42A4 /* CustomButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonCell.swift; sourceTree = "<group>"; };
 		ED77B7C725F49FA1000BFF44 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		ED77B7CE25F4A19E000BFF44 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
@@ -185,6 +187,23 @@
 			path = WorkAndAnalyse;
 			sourceTree = "<group>";
 		};
+		ED4D182A2613807300F28495 /* CreateSubtask */ = {
+			isa = PBXGroup;
+			children = (
+				ED4D182B2613812C00F28495 /* AddSubtaskViewController.swift */,
+			);
+			path = CreateSubtask;
+			sourceTree = "<group>";
+		};
+		ED4D182E2613B8C100F28495 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				ED5FEFBA25EE88A3004581EF /* FirebaseRegistrationService.swift */,
+				ED2EBFB225EFDEC5005B7A1E /* FirebaseLoginService.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
 		ED4FA65B25E82ECF00C6E04D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,8 +274,6 @@
 		ED6AE31126067BF3003D42A4 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				ED362ABD26125413008DB051 /* MainTabBarViewOutput.swift */,
-				ED362ABA26125401008DB051 /* MainTabBarCoordinator.swift */,
 				ED362AB02611D9A7008DB051 /* MainTabBarController.swift */,
 			);
 			path = TabBar;
@@ -350,6 +367,7 @@
 				EDAC85E226024F7400F6D871 /* TaskCreationCoordinator.swift */,
 				ED820098260F9F6500B89F80 /* TaskCreationCoordinatorFinishOutput.swift */,
 				ED820095260F9EAA00B89F80 /* CreateTask */,
+				ED4D182A2613807300F28495 /* CreateSubtask */,
 			);
 			path = TaskCreation;
 			sourceTree = "<group>";
@@ -396,10 +414,11 @@
 		EDFD051125FA35C000B8988F /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				ED5FEFBA25EE88A3004581EF /* RegistrationService.swift */,
-				ED2EBFB225EFDEC5005B7A1E /* LoginService.swift */,
+				ED4D182E2613B8C100F28495 /* Implementations */,
 				EDF5F32B25FA0AB3007CD5C1 /* AuthorizationError.swift */,
 				EDAC85CF2600FF8D00F6D871 /* AuthorizationResponse.swift */,
+				ED4D18312613B97200F28495 /* LoginService.swift */,
+				ED4D18342613B9B800F28495 /* RegistrationService.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -522,7 +541,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED362ABB26125401008DB051 /* MainTabBarCoordinator.swift in Sources */,
 				ED77B7C825F49FA1000BFF44 /* Coordinator.swift in Sources */,
 				ED4F875925E7F033008117AB /* BaseViewController.swift in Sources */,
 				ED3EF90B260CBF6500C41119 /* CreateTaskViewModel.swift in Sources */,
@@ -542,9 +560,9 @@
 				ED77B7CF25F4A19E000BFF44 /* AuthCoordinator.swift in Sources */,
 				ED362AB12611D9A7008DB051 /* MainTabBarController.swift in Sources */,
 				ED820085260F8DCD00B89F80 /* RouterProtocol.swift in Sources */,
-				ED5FEFBB25EE88A3004581EF /* RegistrationService.swift in Sources */,
+				ED5FEFBB25EE88A3004581EF /* FirebaseRegistrationService.swift in Sources */,
 				ED3EF8FB260B28EC00C41119 /* LabelSectionHeaderView.swift in Sources */,
-				ED2EBFB325EFDEC5005B7A1E /* LoginService.swift in Sources */,
+				ED2EBFB325EFDEC5005B7A1E /* FirebaseLoginService.swift in Sources */,
 				EDAC85DF26024F3400F6D871 /* CreateTaskViewController.swift in Sources */,
 				ED820069260F54AD00B89F80 /* Presentable.swift in Sources */,
 				ED4FA66525E8C92A00C6E04D /* StyledTextField.swift in Sources */,
@@ -553,13 +571,15 @@
 				ED820090260F9C4200B89F80 /* UIViewController+Presentable.swift in Sources */,
 				ED6AE3192607DEAD003D42A4 /* CustomButtonCell.swift in Sources */,
 				ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */,
+				ED4D18352613B9B800F28495 /* RegistrationService.swift in Sources */,
 				ED4FA67925E8E49000C6E04D /* UIColor+Ext.swift in Sources */,
 				ED820060260F53D600B89F80 /* BaseCoordinator.swift in Sources */,
 				ED4FA68125E8EB1E00C6E04D /* CustomColors.swift in Sources */,
 				ED4FA67E25E8E6D900C6E04D /* StyledButton.swift in Sources */,
+				ED4D182C2613812C00F28495 /* AddSubtaskViewController.swift in Sources */,
 				ED820078260F58C000B89F80 /* LauchInstructor.swift in Sources */,
-				ED362ABE26125413008DB051 /* MainTabBarViewOutput.swift in Sources */,
 				ED4ADB4125E7EE1F00935A90 /* SceneDelegate.swift in Sources */,
+				ED4D18322613B97200F28495 /* LoginService.swift in Sources */,
 				EDFD053525FA404700B8988F /* SignUpViewModel.swift in Sources */,
 				EDF5F32C25FA0AB3007CD5C1 /* AuthorizationError.swift in Sources */,
 				ED820099260F9F6500B89F80 /* TaskCreationCoordinatorFinishOutput.swift in Sources */,

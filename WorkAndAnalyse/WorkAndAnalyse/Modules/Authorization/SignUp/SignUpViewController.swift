@@ -78,7 +78,7 @@ class SignUpViewController: ScrollableViewController {
         title = "Create New Account"
         
         setupViews()
-        setUpBindings()
+        setupBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,7 +131,7 @@ class SignUpViewController: ScrollableViewController {
     
     // MARK: - ViewModel methods
     
-    private func setUpBindings() {
+    private func setupBindings() {
         emailTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
         usernameTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(credentialsChanged), for: .editingChanged)

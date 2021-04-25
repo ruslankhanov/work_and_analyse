@@ -11,6 +11,7 @@ protocol RouterProtocol: Presentable {
     
     func present(_ module: Presentable?)
     func present(_ module: Presentable?, animated: Bool)
+    func presentWithBar(_ module: Presentable?, animated: Bool)
     
     func push(_ module: Presentable?)
     func push(_ module: Presentable?, transition: UIViewControllerAnimatedTransitioning?)

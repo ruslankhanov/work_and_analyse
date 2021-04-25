@@ -10,13 +10,11 @@ import UIKit
 class ViewControllerFactory {
     func instantiateSignInViewController() -> SignInViewController {
         let viewController = SignInViewController()
-        viewController.viewModel = SignInViewModel(loginService: LoginService())
         return viewController
     }
 
     func instantiateSignUpViewController() -> SignUpViewController {
         let viewController = SignUpViewController()
-        viewController.viewModel = SignUpViewModel(registrationService: RegistrationService())
         return viewController
     }
     
@@ -25,14 +23,14 @@ class ViewControllerFactory {
         return viewController
     }
     
-    func instantiateMainTabBarController() -> MainTabBarController {
-        let tabBarController = MainTabBarController()
+    func instantiateMainTabBarController(coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) -> MainTabBarController {
+        let tabBarController = MainTabBarController(coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
         return tabBarController
     }
-    /*
-    func instantiateCreatSubtaskViewController() -> CreateSubtaskViewController {
-        let viewController = CreateSubtaskViewController()
+    
+    func instantiateAddSubtaskViewController() -> AddSubtaskViewController {
+        let viewController = AddSubtaskViewController()
         return viewController
     }
-    */
+    
 }

@@ -32,6 +32,13 @@ final class Router: NSObject, RouterProtocol {
         self.rootController?.present(controller, animated: animated, completion: nil)
     }
     
+    func presentWithBar(_ module: Presentable?, animated: Bool) {
+        guard let controller = module?.toPresent() else { return }
+        let navigationController = UINavigationController(rootViewController: controller)
+        self.present(navigationController, animated: animated)
+    }
+
+    
     func push(_ module: Presentable?)  {
         self.push(module, transition: nil)
     }

@@ -8,7 +8,15 @@
 import UIKit
 import SnapKit
 
-class SignInViewController: ScrollableViewController {
+protocol SignInViewControllerProtocol {
+    var onGoToSignUp: (() -> Void)? { get set }
+}
+
+class SignInViewController: ScrollableViewController, SignInViewControllerProtocol {
+    
+    // MARK: - SigInViewControllerProtocol
+    
+    var onGoToSignUp: (() -> Void)?
     
     // MARK: - Vars & Lets
     
@@ -171,7 +179,7 @@ class SignInViewController: ScrollableViewController {
     }
     
     @objc private func signUpTap() {
-        viewModel.signUpTap()
+        onGoToSignUp?()
     }
     
     @objc private func signInTap() {

@@ -333,6 +333,7 @@ PODS:
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.12)
   - SnapKit (5.0.1)
+  - TableKit (2.11.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -340,6 +341,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - FirebaseFirestoreSwift
   - SnapKit (~> 5.0.0)
+  - TableKit
 
 SPEC REPOS:
   trunk:
@@ -363,6 +365,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SnapKit
+    - TableKit
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -385,7 +388,8 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  TableKit: 8a1a267d841a2da638ea09bdb0db33aedb459fa8
 
-PODFILE CHECKSUM: 4927e08a50cafbe6eb4f664f7961d61fc1ff635e
+PODFILE CHECKSUM: f52c36aa9bc55d5f7bed4b6d148733a533505b02
 
 COCOAPODS: 1.10.1

@@ -7,6 +7,16 @@
 
 import Foundation
 
-class CreateTaskViewModel {
+protocol CreateTaskViewModelProtocol {
+    var title: String { get set }
+    
+    func create()
+}
 
+class CreateTaskViewModel: CreateTaskViewModelProtocol {
+    var title = ""
+    
+    func create() {
+        #warning("Non-implemented")
+    }
 }

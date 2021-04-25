@@ -49,9 +49,7 @@ final class ApplicationCoordinator: BaseCoordinator {
     }
     
     private func runMainFlow() {
-        let (coordinator, module) = coordinatorFactory.makeMainTabBarCoordinator( coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
-        addDependency(coordinator)
+        let module = viewControllerFactory.instantiateMainTabBarController(coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
         router.setRootModule(module, hideBar: true)
-        coordinator.start()
     }
 }

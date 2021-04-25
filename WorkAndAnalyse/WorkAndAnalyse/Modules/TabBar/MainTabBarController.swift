@@ -7,45 +7,41 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController, UITabBarControllerDelegate, MainTabBarViewOutput {
-    
-    
-    // MARK: - MainTabBarViewOutput
-    
-    var onTaskCreationFlowSelect: ((UINavigationController) -> ())?
-    
-    var onViewDidLoad: ((UINavigationController) -> ())?
+class MainTabBarController: UITabBarController {
     
     // MARK: - Vars & Lets
     
-    var itemsCount: Int = 2
+    private let coordinatorFactory: CoordinatorFactoryProtocol
+    private let viewControllerFactory: ViewControllerFactory
     
+    private var coordinators: [(Coordinator, UINavigationController)] = []
+    
+    
+    // MARK: - Init
+    
+    init(coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) {
+        self.coordinatorFactory = coordinatorFactory
+        self.viewControllerFactory = viewControllerFactory
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        delegate = self
+        coordinators = [
+            coordinatorFactory.makeTaskCreationCoordinator(navigationController: UINavigationController(), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
+        ]
         
-        viewControllers = [UINavigationController()]
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let controller = viewControllers?.first as? UINavigationController {
-            onViewDidLoad?(controller)
+        coordinators.forEach {
+            $0.0.start()
         }
-    }
-    
-    // MARK: - UITabBarControllerDelegate
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        guard let controller = viewControllers?[selectedIndex] as? UINavigationController else { return }
-        
-        if selectedIndex == 0 {
-            onTaskCreationFlowSelect?(controller)
-        }
+                
+        viewControllers = coordinators.map { $0.1 }
     }
 }

@@ -6,7 +6,6 @@
 //
 
 protocol SignInOutput {
-    var signUpAction: (() -> Void)? { get set }
     var finishSignIn: (() -> Void)? { get set }
     var failSignIn: ((String) -> Void)? { get set }
 }
@@ -16,7 +15,6 @@ protocol SignInViewModelProtocol {
     var password: String { get set }
     
     func signInTap()
-    func signUpTap()
 }
 
 class SignInViewModel: SignInViewModelProtocol, SignInOutput {
@@ -43,9 +41,5 @@ class SignInViewModel: SignInViewModelProtocol, SignInOutput {
                 self?.finishSignIn?()
             }
         }
-    }
-    
-    func signUpTap() {
-        signUpAction?()
     }
 }

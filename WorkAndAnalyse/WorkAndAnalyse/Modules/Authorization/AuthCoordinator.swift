@@ -37,37 +37,45 @@ class AuthCoordinator: BaseCoordinator, AuthCoordinatorFinishOutput {
     private func showSignInViewController() {
         let viewController = viewControllerFactory.instantiateSignInViewController()
         
-        viewController.viewModel.signUpAction = { [unowned self] in
+        let viewModel = SignInViewModel(loginService: FirebaseLoginService())
+        
+        viewController.onGoToSignUp = { [unowned self] in
             self.showSignUpViewController()
         }
         
-        viewController.viewModel.finishSignIn = { [weak self, weak viewController] in
+        viewModel.finishSignIn = { [weak self, weak viewController] in
             viewController?.showAlert(title: "Success", message: "You've successfully signed in.")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.finishFlow?()
             }
         }
         
-        viewController.viewModel.failSignIn = { [weak viewController] message in
+        viewModel.failSignIn = { [weak viewController] message in
             viewController?.showAlert(title: "Error", message: message)
         }
+        
+        viewController.viewModel = viewModel
         
         router.setRootModule(viewController, hideBar: false)
     }
     
     private func showSignUpViewController() {
         let viewController = viewControllerFactory.instantiateSignUpViewController()
+        
+        let viewModel = SignUpViewModel(registrationService: FirebaseRegistrationService())
 
-        viewController.viewModel.finishSignUp = { [unowned self, weak viewController] in
+        viewModel.finishSignUp = { [unowned self, weak viewController] in
             viewController?.showAlert(title: "Success", message: "You've successfully created your account.")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.finishFlow?()
             }
         }
         
-        viewController.viewModel.failSignUp = { [weak viewController] message in
+        viewModel.failSignUp = { [weak viewController] message in
             viewController?.showAlert(title: "Error", message: message)
         }
+        
+        viewController.viewModel = viewModel
         
         router.push(viewController)
     }
