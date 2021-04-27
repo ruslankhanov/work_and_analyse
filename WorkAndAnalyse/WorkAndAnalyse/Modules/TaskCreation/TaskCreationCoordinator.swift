@@ -34,18 +34,30 @@ class TaskCreationCoordinator: BaseCoordinator, TaskCreationCoordinatorFinishOut
     // MARK: - Private methods
     
     private func showCreateTaskViewController() {
-        let viewController = viewControllerFactory.instantiateCreateTaskViewController()
-        viewController.tabBarItem = UITabBarItem(title: "Create task", image: UIImage(systemName: "plus"), tag: 0)
-        
-        viewController.onGoToSubtaskCreation = { [weak self] in
-            self?.showCreateSubtaskViewController()
+        let viewModel = CreateTaskViewModel(taskService: TaskServiceImplementation(repository: FirestoreTaskRepository()))
+        viewModel.onGoToSubtaskCreation = { [unowned viewModel, unowned self] in
+            showCreateSubtaskViewController(delegate: viewModel)
         }
+        
+        let viewController = viewControllerFactory.instantiateCreateTaskViewController()
+        
+        viewModel.delegate = viewController
+        
+        viewController.viewModel = viewModel
+        viewController.tabBarItem = UITabBarItem(title: "Create task", image: UIImage(systemName: "plus"), tag: 0)
 
         router.setRootModule(viewController)
     }
     
-    private func showCreateSubtaskViewController() {
+    private func showCreateSubtaskViewController(delegate: AddSubtaskViewModelDelegate) {
+        let viewModel = AddSubtaskViewModel()
+        viewModel.delegate = delegate
+        viewModel.onFinish = { [unowned self] in
+            router.dismissModule()
+        }
         let viewController = viewControllerFactory.instantiateAddSubtaskViewController()
+        
+        viewController.viewModel = viewModel
         router.presentWithBar(viewController, animated: true)
     }
 }

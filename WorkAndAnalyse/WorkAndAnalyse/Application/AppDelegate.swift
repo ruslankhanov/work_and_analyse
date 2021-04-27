@@ -54,9 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureUIAppearance() {
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: CustomFonts.openSans(size: 38, style: .bold)]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor.white, .font: CustomFonts.openSans(size: 38, style: .bold)]
+        UINavigationBar.appearance().titleTextAttributes = [
+            .font: CustomFonts.openSans(size: 21, style: .regular)
+        ]
         UITabBar.appearance().barTintColor = CustomColors.creamWhiteColor
-        UITabBar.appearance().unselectedItemTintColor = CustomColors.lightBlackColor
+        UITabBar.appearance().unselectedItemTintColor = CustomColors.darkBlueColor
         UITabBar.appearance().tintColor = CustomColors.lightOrangeColor
     }
     

@@ -25,10 +25,18 @@ class LabelSectionHeaderView: UIView {
         return label
     }()
     
+    
     override func layoutSubviews() {
         self.addSubview(titleLabel)
         setupConstraints()
         super.layoutSubviews()
+    }
+    
+    static func getView(with title: String) -> LabelSectionHeaderView {
+        let headerView = LabelSectionHeaderView()
+        headerView.title = title
+        
+        return headerView
     }
     
     private func setupConstraints() {

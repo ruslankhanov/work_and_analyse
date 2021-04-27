@@ -8,21 +8,19 @@
 import UIKit
 import TableKit
 
-protocol CreateTaskViewControllerProtocol {
-    var onGoToSubtaskCreation: (() -> Void)? { get set }
-}
-
-class CreateTaskViewController: UITableViewController, CreateTaskViewControllerProtocol {
+class CreateTaskViewController: BaseViewController {
     
     // MARK: - Vars & Lets
     
     var viewModel: CreateTaskViewModelProtocol!
     
-    var tableDirector: TableDirector!
+    private var tableDirector: TableDirector!
     
-    // MARK: - CreateTaskViewControllerProtocol
-    
-    var onGoToSubtaskCreation: (() -> Void)?
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: view.frame.height)))
+        tableView.separatorStyle = .none
+        return tableView
+    }()
     
     // MARK: - Lifecycle
     
@@ -32,55 +30,53 @@ class CreateTaskViewController: UITableViewController, CreateTaskViewControllerP
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Create Task"
         
-        let image = UIImage(named: "background")
-        let backgroundView = UIImageView(image: image)
+        view.addSubview(tableView)
         
         // Configure table view
-        tableView.backgroundView = backgroundView
+        tableView.backgroundColor = .clear
         
         tableDirector = TableDirector(tableView: tableView)
         
         configureSections()
     }
     
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        if(velocity.y > 0) {
+            UIView.animate(withDuration: 2.5, delay: 0, options: UIView.AnimationOptions(), animations: {
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
+                self.navigationController?.setToolbarHidden(true, animated: true)
+                print("Hide")
+            }, completion: nil)
+            
+        } else {
+            UIView.animate(withDuration: 2.5, delay: 0, options: UIView.AnimationOptions(), animations: {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                self.navigationController?.setToolbarHidden(false, animated: true)
+                print("Unhide")
+            }, completion: nil)
+        }
+    }
+    
     // MARK: - Private methods
     
     private func configureSections() {
-        //
-        let createAction = TableRowAction<CustomButtonCell>(.custom(CustomButtonCellActions.buttonTapped)) { [weak self] (options) in
-            self?.viewModel.create()
-        }
-        let titleEdited = TableRowAction<CustomTextFieldCell>(.custom(CustomTextFieldCellActions.textFieldChanged)) { [weak self] (options) in
-            self?.viewModel.title = options.item
-        }
-        let addSubtaskAction = TableRowAction<CustomButtonCell>(.custom(CustomButtonCellActions.buttonTapped)) { [weak self] (options) in
-            self?.onGoToSubtaskCreation?()
+        viewModel.dataToPresent.forEach {
+            $0.headerHeight = 45.0
         }
         
-        let titleTextFieldRow = TableRow<CustomTextFieldCell>(item: "Type some title for your task...", actions: [titleEdited])
-        let createButtonRow = TableRow<CustomButtonCell>(item: CustomButtonCellConfiguration(title: "CREATE", style: .filled), actions: [createAction])
-        
-        let headerView = LabelSectionHeaderView()
-        headerView.title = "Title"
-        let section = TableSection(headerView: headerView, footerView: UIView(), rows: [titleTextFieldRow, createButtonRow])
-        section.headerHeight = 45.0
-        tableDirector += section
-        
-        //
-        
-        let addButtonRow = TableRow<CustomButtonCell>(item: CustomButtonCellConfiguration(title: "+", style: .outline), actions: [addSubtaskAction])
-        
-        let anotherHeaderView = LabelSectionHeaderView()
-        anotherHeaderView.title = "Subtasks"
-        
-        let section1 = TableSection(headerView: anotherHeaderView, footerView: UIView(), rows: [addButtonRow])
-        section1.headerHeight = 45.0
-        tableDirector += section1
+        tableDirector += viewModel.dataToPresent
         
     }
+}
+
+extension CreateTaskViewController: CreaTaskViewModelDelegate {
+    func didUpdateData() {
+        tableView.reloadData()
+    }
     
-    private func setupBindings() {
-        //
+    func didFailTaskCreation(errorMessage: String) {
+        showAlert(title: "Error", message: errorMessage)
     }
 }
 
