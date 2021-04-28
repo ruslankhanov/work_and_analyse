@@ -54,7 +54,7 @@ class CreateTaskViewModel: CreateTaskViewModelProtocol, CreateTaskViewModelOutpu
             TableSection(headerView: LabelSectionHeaderView.getView(with: "Title"), footerView: UIView(), rows: [
                 TableRow<CustomTextFieldCell>(item: "Type some title for your task...", actions: [
                     TableRowAction<CustomTextFieldCell>(.custom(CustomTextFieldCellActions.textFieldChanged)) { [unowned self] (options) in
-                        title = options.item
+                        title = options.cell?.title
                     }
                 ]),
                 TableRow<CustomButtonCell>(item: CustomButtonCellConfiguration(title: "CREATE", style: .filled), actions: [
@@ -88,13 +88,20 @@ class CreateTaskViewModel: CreateTaskViewModelProtocol, CreateTaskViewModelOutpu
     private func create() {
         guard
             let title = title,
-            !subtasks.isEmpty,
-            !title.isEmpty
+            !subtasks.isEmpty
         else {
+            delegate?.didFailTaskCreation(errorMessage: "Please enter the title of task and create at least one subtask.")
             return
         }
         
-        taskService.createTask(title: title, startTime: startTime, subtasks: subtasks) { [weak self] error in
+        let cleanTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard !cleanTitle.isEmpty else {
+            delegate?.didFailTaskCreation(errorMessage: "Please enter the title of task.")
+            return
+        }
+        
+        taskService.createTask(title: cleanTitle, startTime: startTime, subtasks: subtasks) { [weak self] error in
             if let error = error {
                 self?.delegate?.didFailTaskCreation(errorMessage: error.localizedDescription)
             }

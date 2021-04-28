@@ -17,7 +17,9 @@ class CustomTextFieldCell: UITableViewCell, ConfigurableCell {
     
     // MARK: - Vars & Lets
     
-    lazy var textField: StyledTextField = {
+    var title = ""
+    
+    private lazy var textField: StyledTextField = {
         let textField = StyledTextField()
         textField.setStyle(style: .normal)
         textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
@@ -69,6 +71,7 @@ class CustomTextFieldCell: UITableViewCell, ConfigurableCell {
     }
     
     @objc private func textFieldChanged() {
+        title = textField.text ?? ""
         TableCellAction(key: CustomTextFieldCellActions.textFieldChanged, sender: self).invoke()
     }
 }

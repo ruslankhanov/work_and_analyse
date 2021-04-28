@@ -22,6 +22,7 @@ class TaskServiceImplementation: TaskService {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
+        
         let task = Task(id: nil, userId: userId, title: title, startTime: startTime, subtasks: subtasks)
         
         repository.addTask(task) { error in
