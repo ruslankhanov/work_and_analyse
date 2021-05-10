@@ -6,7 +6,8 @@
 //
 
 protocol TaskRepository {
-    func loadData(completion: @escaping (Result<[Task], Error>) -> Void)
+    var tasks: [Task] { get set }
+    func loadData()
     func addTask(_ task: Task, completion: @escaping (Error?) -> Void)
     func removeTask(_ task: Task, completion: @escaping (Error?) -> Void)
 }

@@ -15,30 +15,34 @@ class FirestoreTaskRepository: TaskRepository {
     
     var tasks: [Task] = []
     
+    init() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.loadData()
+        }
+    }
+    
     // MARK: - CRUD
     
-    func loadData(completion: @escaping (Result<[Task], Error>) -> Void) {
+    func loadData() {
         let docsRef = db.collection("tasks").whereField("userId", in: [Auth.auth().currentUser?.uid]).order(by: "startTime")
         
         docsRef.getDocuments { [unowned self] querySnapshot, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                if let querySnapshot = querySnapshot {
-                    for document in querySnapshot.documents {
-                        do {
-                            let task = try document.data(as: Task.self)
-                            
-                            if let task = task {
-                                tasks.append(task)
-                            }
-                        } catch {
-                            print("Some tasks did not load.")
+            guard error == nil else { return }
+            
+            if let querySnapshot = querySnapshot {
+                for document in querySnapshot.documents {
+                    do {
+                        let task = try document.data(as: Task.self)
+                        
+                        if let task = task {
+                            tasks.append(task)
                         }
+                    } catch {
+                        print("Some tasks did not load.")
                     }
-                    completion(.success(tasks))
                 }
             }
+            
         }
     }
     

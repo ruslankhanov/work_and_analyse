@@ -20,6 +20,7 @@ class ViewControllerFactory {
     
     func instantiateCreateTaskViewController() -> CreateTaskViewController {
         let viewController = CreateTaskViewController()
+        viewController.tabBarItem = UITabBarItem(title: "Create task", image: UIImage(systemName: "plus"), tag: 0)
         return viewController
     }
     
@@ -30,6 +31,12 @@ class ViewControllerFactory {
     
     func instantiateAddSubtaskViewController() -> AddSubtaskViewController {
         let viewController = AddSubtaskViewController()
+        return viewController
+    }
+    
+    func instantiateMyTasksViewController() -> MyTasksViewController {
+        let viewController = MyTasksViewController()
+        viewController.tabBarItem = UITabBarItem(title: "My tasks", image: UIImage(systemName: "person.crop.circle"), tag: 1)
         return viewController
     }
     

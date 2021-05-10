@@ -17,7 +17,7 @@ class CreateTaskViewController: BaseViewController {
     private var tableDirector: TableDirector!
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: view.frame.height)))
+        let tableView = UITableView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: view.frame.height)), style: .grouped)
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -28,34 +28,17 @@ class CreateTaskViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.hidesBarsOnSwipe = true
         navigationItem.title = "Create Task"
         
         view.addSubview(tableView)
         
         // Configure table view
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = CustomColors.darkBlueColor
         
         tableDirector = TableDirector(tableView: tableView)
         
         configureSections()
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-        if(velocity.y > 0) {
-            UIView.animate(withDuration: 2.5, delay: 0, options: UIView.AnimationOptions(), animations: {
-                self.navigationController?.setNavigationBarHidden(true, animated: true)
-                self.navigationController?.setToolbarHidden(true, animated: true)
-                print("Hide")
-            }, completion: nil)
-            
-        } else {
-            UIView.animate(withDuration: 2.5, delay: 0, options: UIView.AnimationOptions(), animations: {
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
-                self.navigationController?.setToolbarHidden(false, animated: true)
-                print("Unhide")
-            }, completion: nil)
-        }
     }
     
     // MARK: - Private methods
@@ -66,7 +49,6 @@ class CreateTaskViewController: BaseViewController {
         }
         
         tableDirector += viewModel.dataToPresent
-        
     }
 }
 

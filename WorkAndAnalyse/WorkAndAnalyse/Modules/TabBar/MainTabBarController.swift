@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     // MARK: - Vars & Lets
     
@@ -34,9 +34,14 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        coordinators = [
-            coordinatorFactory.makeTaskCreationCoordinator(navigationController: UINavigationController(), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
-        ]
+        let taskCreationCoordinator = coordinatorFactory.makeTaskCreationCoordinator(navigationController: UINavigationController(), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
+        taskCreationCoordinator.0.finishFlow = { [unowned self] in
+            selectedIndex = 1
+        }
+        
+        let myTasksCoordinator =             coordinatorFactory.makeMyTasksCoordinator(navigationController: UINavigationController(), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
+        
+        coordinators = [taskCreationCoordinator, myTasksCoordinator]
         
         coordinators.forEach {
             $0.0.start()

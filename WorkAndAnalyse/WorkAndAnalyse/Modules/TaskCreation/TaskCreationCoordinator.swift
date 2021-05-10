@@ -6,9 +6,9 @@
 //
 import UIKit
 
-class TaskCreationCoordinator: BaseCoordinator, TaskCreationCoordinatorFinishOutput {
+class TaskCreationCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
-    // MARK: - AuthCoordinatorFinishOutput
+    // MARK: - CoordinatorFinishOutput
     
     var finishFlow: (() -> Void)?
     
@@ -38,13 +38,15 @@ class TaskCreationCoordinator: BaseCoordinator, TaskCreationCoordinatorFinishOut
         viewModel.onGoToSubtaskCreation = { [unowned viewModel, unowned self] in
             showCreateSubtaskViewController(delegate: viewModel)
         }
+        viewModel.onFinish = { [unowned self] in
+            finishFlow?()
+        }
         
         let viewController = viewControllerFactory.instantiateCreateTaskViewController()
         
         viewModel.delegate = viewController
         
         viewController.viewModel = viewModel
-        viewController.tabBarItem = UITabBarItem(title: "Create task", image: UIImage(systemName: "plus"), tag: 0)
 
         router.setRootModule(viewController)
     }

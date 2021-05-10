@@ -7,9 +7,7 @@
 import Foundation
 
 protocol TaskService {
-    var tasks: [Task] { get set }
-    
+    func loadTasks(type: TasksType) -> [DateComponents: [Task]]?
     func createTask(title: String, startTime: Date, subtasks: [Subtask], completion: @escaping (Error?) -> Void)
-    func loadTasks(completion: @escaping (Error?) -> Void)
     //func removeTask()
 }

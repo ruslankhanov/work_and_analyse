@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AuthCoordinator: BaseCoordinator, AuthCoordinatorFinishOutput {
+class AuthCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
     // MARK: - AuthCoordinatorFinishOutput
     

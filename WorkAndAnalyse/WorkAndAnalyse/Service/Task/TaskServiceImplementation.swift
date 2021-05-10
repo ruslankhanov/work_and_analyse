@@ -8,14 +8,36 @@
 import Foundation
 import FirebaseAuth
 
+enum TasksType {
+    typealias FilterStatement = (Task) -> Bool
+    
+    case next
+    case missing
+    case history
+    
+    var filterStatement: FilterStatement {
+        switch self {
+        case .next:
+            return { $0.endTime <= Date() && !$0.completed }
+        case .missing:
+            return { $0.endTime > Date() && !$0.completed }
+        case .history:
+            return { $0.completed }
+        }
+    }
+}
+
 class TaskServiceImplementation: TaskService {
-    
-    var tasks: [Task] = []
-    
+        
     private var repository: TaskRepository
     
     init(repository: TaskRepository) {
         self.repository = repository
+    }
+    
+    func loadTasks(type: TasksType) -> [DateComponents: [Task]]? {
+        let result = repository.tasks.filter(type.filterStatement)
+        return result.isEmpty ? nil : groupByDay(tasks: result)
     }
     
     func createTask(title: String, startTime: Date, subtasks: [Subtask], completion: @escaping (Error?) -> Void) {
@@ -33,14 +55,11 @@ class TaskServiceImplementation: TaskService {
         }
     }
     
-    func loadTasks(completion: @escaping (Error?) -> Void) {
-        repository.loadData { [weak self] result in
-            switch result {
-            case .failure(let error):
-                completion(error)
-            case .success(let tasks):
-                self?.tasks = tasks
-            }
+    // MARK: - Helpers
+    private func groupByDay(tasks: [Task]) -> [DateComponents: [Task]] {
+        let tasksGroupedByDay = Dictionary(grouping: tasks) { task in
+            return Calendar.current.dateComponents([.day, .month, .year], from: task.startTime)
         }
+        return tasksGroupedByDay
     }
 }

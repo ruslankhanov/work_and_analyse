@@ -18,9 +18,16 @@ struct Task: Codable {
         subtasks.allSatisfy { $0.completed }
     }
     
+    private var duration: TimeInterval {
+        subtasks.map { $0.duration }.reduce(TimeInterval(0), +)
+    }
+    
+    var durationString: String {
+        duration.stringFromTimeInterval()
+    }
+    
     var endTime: Date {
-        let durations = subtasks.map { $0.duration }
-        return Date(timeInterval: durations.reduce(TimeInterval.init(0), +), since: startTime)
+        Date(timeInterval: duration, since: startTime)
     }
 }
 
@@ -28,4 +35,8 @@ struct Subtask: Codable {
     var title: String
     var duration: TimeInterval
     var completed: Bool
+    
+    var durationString: String {
+        duration.stringFromTimeInterval()
+    }
 }

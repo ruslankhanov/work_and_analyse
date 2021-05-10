@@ -14,6 +14,7 @@ protocol CreaTaskViewModelDelegate: class {
 
 protocol CreateTaskViewModelOutput {
     var onGoToSubtaskCreation: (() -> Void)? { get set }
+    var onFinish: (() -> Void)? { get set }
 }
 
 protocol CreateTaskViewModelProtocol {
@@ -24,13 +25,14 @@ class CreateTaskViewModel: CreateTaskViewModelProtocol, CreateTaskViewModelOutpu
     
     // MARK: - CreateTaskViewModelOutput
     var onGoToSubtaskCreation: (() -> Void)?
+    var onFinish: (() -> Void)?
     
     // MARK: - Vars & Lets
     var dataToPresent: [TableSection] = []
     
     weak var delegate: CreaTaskViewModelDelegate?
     
-    private var taskService: TaskService
+    private let taskService: TaskService
     
     private var title: String?
     private var startTime = Date()
@@ -104,8 +106,11 @@ class CreateTaskViewModel: CreateTaskViewModelProtocol, CreateTaskViewModelOutpu
         taskService.createTask(title: cleanTitle, startTime: startTime, subtasks: subtasks) { [weak self] error in
             if let error = error {
                 self?.delegate?.didFailTaskCreation(errorMessage: error.localizedDescription)
+                return
             }
         }
+        
+        onFinish?()
     }
 }
 

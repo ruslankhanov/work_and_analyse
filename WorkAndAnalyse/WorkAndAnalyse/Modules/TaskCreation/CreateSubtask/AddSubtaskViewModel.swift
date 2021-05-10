@@ -43,7 +43,7 @@ class AddSubtaskViewModel: AddSubtaskViewModelProtocol, AddSubtaskViewModelOutpu
     // MARK: - Public methods
     
     func saveTapped() {
-        guard let title = title, title != "", let duration = duration, duration != .zero else {
+        guard let title = title, !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, let duration = duration, duration != .zero else {
             return
         }
         
@@ -53,7 +53,7 @@ class AddSubtaskViewModel: AddSubtaskViewModelProtocol, AddSubtaskViewModelOutpu
     }
     
     func cancelTapped() {
-        
+        onFinish?()
     }
     
     // MARK: - Private methods

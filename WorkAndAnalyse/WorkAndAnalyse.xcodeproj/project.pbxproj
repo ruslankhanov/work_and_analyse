@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8A53FCAC822D139B05CECBE7 /* Pods_WorkAndAnalyse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593EC2321DA10D43C5D392B9 /* Pods_WorkAndAnalyse.framework */; };
 		ED2EBFB325EFDEC5005B7A1E /* FirebaseLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2EBFB225EFDEC5005B7A1E /* FirebaseLoginService.swift */; };
+		ED31CB4426394BEF001CDD23 /* MyTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31CB4326394BEF001CDD23 /* MyTasksCoordinator.swift */; };
+		ED31CB4B26394D58001CDD23 /* MyTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31CB4A26394D58001CDD23 /* MyTasksViewController.swift */; };
+		ED31CB4E263962B8001CDD23 /* CollapsableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31CB4D263962B8001CDD23 /* CollapsableViewModel.swift */; };
+		ED31CB512639646F001CDD23 /* MyTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31CB502639646F001CDD23 /* MyTasksViewModel.swift */; };
 		ED362AB12611D9A7008DB051 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED362AB02611D9A7008DB051 /* MainTabBarController.swift */; };
 		ED38745B25EBFDB5007D9A38 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */; };
 		ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */; };
@@ -47,9 +51,8 @@
 		ED820078260F58C000B89F80 /* LauchInstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED820077260F58C000B89F80 /* LauchInstructor.swift */; };
 		ED820080260F5CA600B89F80 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82007F260F5CA600B89F80 /* ViewControllerFactory.swift */; };
 		ED820085260F8DCD00B89F80 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED820084260F8DCD00B89F80 /* RouterProtocol.swift */; };
-		ED820088260F8F3400B89F80 /* AuthCoordinatorFinishOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED820087260F8F3400B89F80 /* AuthCoordinatorFinishOutput.swift */; };
+		ED820088260F8F3400B89F80 /* CoordinatorFinishOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED820087260F8F3400B89F80 /* CoordinatorFinishOutput.swift */; };
 		ED820090260F9C4200B89F80 /* UIViewController+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82008F260F9C4200B89F80 /* UIViewController+Presentable.swift */; };
-		ED820099260F9F6500B89F80 /* TaskCreationCoordinatorFinishOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED820098260F9F6500B89F80 /* TaskCreationCoordinatorFinishOutput.swift */; };
 		EDAC85C92600F0C500F6D871 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC85C82600F0C500F6D871 /* UIViewController+Alert.swift */; };
 		EDAC85CC2600FD4200F6D871 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC85CB2600FD4200F6D871 /* SignInViewModel.swift */; };
 		EDAC85D02600FF8D00F6D871 /* AuthorizationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC85CF2600FF8D00F6D871 /* AuthorizationResponse.swift */; };
@@ -77,6 +80,10 @@
 		ED268F732635F1B5006AFDDD /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		ED268F782636A652006AFDDD /* DetailTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextView.swift; sourceTree = "<group>"; };
 		ED2EBFB225EFDEC5005B7A1E /* FirebaseLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoginService.swift; sourceTree = "<group>"; };
+		ED31CB4326394BEF001CDD23 /* MyTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTasksCoordinator.swift; sourceTree = "<group>"; };
+		ED31CB4A26394D58001CDD23 /* MyTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTasksViewController.swift; sourceTree = "<group>"; };
+		ED31CB4D263962B8001CDD23 /* CollapsableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsableViewModel.swift; sourceTree = "<group>"; };
+		ED31CB502639646F001CDD23 /* MyTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTasksViewModel.swift; sourceTree = "<group>"; };
 		ED362AB02611D9A7008DB051 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -117,9 +124,8 @@
 		ED820077260F58C000B89F80 /* LauchInstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauchInstructor.swift; sourceTree = "<group>"; };
 		ED82007F260F5CA600B89F80 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		ED820084260F8DCD00B89F80 /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
-		ED820087260F8F3400B89F80 /* AuthCoordinatorFinishOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinatorFinishOutput.swift; sourceTree = "<group>"; };
+		ED820087260F8F3400B89F80 /* CoordinatorFinishOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishOutput.swift; sourceTree = "<group>"; };
 		ED82008F260F9C4200B89F80 /* UIViewController+Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentable.swift"; sourceTree = "<group>"; };
-		ED820098260F9F6500B89F80 /* TaskCreationCoordinatorFinishOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationCoordinatorFinishOutput.swift; sourceTree = "<group>"; };
 		EDAC85C82600F0C500F6D871 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		EDAC85CB2600FD4200F6D871 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		EDAC85CF2600FF8D00F6D871 /* AuthorizationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationResponse.swift; sourceTree = "<group>"; };
@@ -163,6 +169,17 @@
 				8BCB4673C8A17830129CDCF0 /* Pods-WorkAndAnalyse.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		ED31CB4226394BC3001CDD23 /* MyTasks */ = {
+			isa = PBXGroup;
+			children = (
+				ED31CB4326394BEF001CDD23 /* MyTasksCoordinator.swift */,
+				ED31CB4A26394D58001CDD23 /* MyTasksViewController.swift */,
+				ED31CB4D263962B8001CDD23 /* CollapsableViewModel.swift */,
+				ED31CB502639646F001CDD23 /* MyTasksViewModel.swift */,
+			);
+			path = MyTasks;
 			sourceTree = "<group>";
 		};
 		ED4ADB3225E7EE1E00935A90 = {
@@ -364,6 +381,7 @@
 		ED82007C260F5A9E00B89F80 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				ED820087260F8F3400B89F80 /* CoordinatorFinishOutput.swift */,
 				ED820068260F54AD00B89F80 /* Presentable.swift */,
 				ED77B7C725F49FA1000BFF44 /* Coordinator.swift */,
 			);
@@ -393,7 +411,6 @@
 			isa = PBXGroup;
 			children = (
 				EDAC85E226024F7400F6D871 /* TaskCreationCoordinator.swift */,
-				ED820098260F9F6500B89F80 /* TaskCreationCoordinatorFinishOutput.swift */,
 				ED820095260F9EAA00B89F80 /* CreateTask */,
 				ED4D182A2613807300F28495 /* CreateSubtask */,
 			);
@@ -422,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF5F32125F92000007CD5C1 /* Authorization */,
+				ED31CB4226394BC3001CDD23 /* MyTasks */,
 				EDAC85DD26024F1C00F6D871 /* TaskCreation */,
 				ED6AE31126067BF3003D42A4 /* TabBar */,
 			);
@@ -431,7 +449,6 @@
 		EDF5F32125F92000007CD5C1 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				ED820087260F8F3400B89F80 /* AuthCoordinatorFinishOutput.swift */,
 				ED77B7CE25F4A19E000BFF44 /* AuthCoordinator.swift */,
 				EDF5F32325F9201E007CD5C1 /* SignUp */,
 				EDF5F32225F9200C007CD5C1 /* SignIn */,
@@ -590,6 +607,7 @@
 				ED77B7C825F49FA1000BFF44 /* Coordinator.swift in Sources */,
 				ED4F875925E7F033008117AB /* BaseViewController.swift in Sources */,
 				ED3EF90B260CBF6500C41119 /* CreateTaskViewModel.swift in Sources */,
+				ED31CB4426394BEF001CDD23 /* MyTasksCoordinator.swift in Sources */,
 				ED268F6526359742006AFDDD /* PickerViewCell.swift in Sources */,
 				ED3EF900260CA4DB00C41119 /* Task.swift in Sources */,
 				ED38745B25EBFDB5007D9A38 /* ScrollableViewController.swift in Sources */,
@@ -602,12 +620,14 @@
 				ED820072260F57D800B89F80 /* ApplicationCoordinator.swift in Sources */,
 				ED268F742635F1B5006AFDDD /* DatePickerCell.swift in Sources */,
 				EDAC85CC2600FD4200F6D871 /* SignInViewModel.swift in Sources */,
+				ED31CB4E263962B8001CDD23 /* CollapsableViewModel.swift in Sources */,
 				EDAC85C92600F0C500F6D871 /* UIViewController+Alert.swift in Sources */,
 				EDEAE27A263876D40010FDFE /* FirestoreTaskRepository.swift in Sources */,
 				ED3EF8F2260A241400C41119 /* CustomTextFieldCell.swift in Sources */,
 				EDFD053225FA3E2100B8988F /* AuthErrorCode+LocalizedDescription.swift in Sources */,
 				ED820080260F5CA600B89F80 /* ViewControllerFactory.swift in Sources */,
-				ED820088260F8F3400B89F80 /* AuthCoordinatorFinishOutput.swift in Sources */,
+				ED820088260F8F3400B89F80 /* CoordinatorFinishOutput.swift in Sources */,
+				ED31CB512639646F001CDD23 /* MyTasksViewModel.swift in Sources */,
 				ED4FA65D25E82EF200C6E04D /* CustomFonts.swift in Sources */,
 				ED4FA66225E8317400C6E04D /* SignInViewController.swift in Sources */,
 				EDEAE26F26377B050010FDFE /* DetailTextViewCell.swift in Sources */,
@@ -619,6 +639,7 @@
 				ED5FEFBB25EE88A3004581EF /* FirebaseRegistrationService.swift in Sources */,
 				ED3EF8FB260B28EC00C41119 /* LabelSectionHeaderView.swift in Sources */,
 				ED2EBFB325EFDEC5005B7A1E /* FirebaseLoginService.swift in Sources */,
+				ED31CB4B26394D58001CDD23 /* MyTasksViewController.swift in Sources */,
 				EDAC85DF26024F3400F6D871 /* CreateTaskViewController.swift in Sources */,
 				ED820069260F54AD00B89F80 /* Presentable.swift in Sources */,
 				ED4FA66525E8C92A00C6E04D /* StyledTextField.swift in Sources */,
@@ -640,7 +661,6 @@
 				ED4D18322613B97200F28495 /* LoginService.swift in Sources */,
 				EDFD053525FA404700B8988F /* SignUpViewModel.swift in Sources */,
 				EDF5F32C25FA0AB3007CD5C1 /* AuthorizationError.swift in Sources */,
-				ED820099260F9F6500B89F80 /* TaskCreationCoordinatorFinishOutput.swift in Sources */,
 				ED82006D260F55AF00B89F80 /* CoordinatorFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
