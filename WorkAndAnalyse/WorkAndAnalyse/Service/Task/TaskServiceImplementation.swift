@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum TasksType {
+enum TasksType: String {
     typealias FilterStatement = (Task) -> Bool
     
-    case next
-    case missing
-    case history
+    case next = "Next tasks"
+    case missing = "Missing"
+    case history = "Completed tasks"
     
     var filterStatement: FilterStatement {
         switch self {

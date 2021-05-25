@@ -14,7 +14,6 @@ class RightDetailSubtitledView: UIView {
     
     private lazy var rightView: UIView = {
         let rightView = UIView()
-        rightView.backgroundColor = CustomColors.lightBrownColor
         rightView.translatesAutoresizingMaskIntoConstraints = false
         return rightView
     }()
@@ -39,7 +38,7 @@ class RightDetailSubtitledView: UIView {
     private lazy var rightTextLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = CustomFonts.openSans(size: 17, style: .bold)
+        label.font = CustomFonts.openSans(size: 17, style: .regular)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -55,10 +54,26 @@ class RightDetailSubtitledView: UIView {
         return stackView
     }()
     
+    init() {
+        super.init(frame: CGRect())
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     // MARK: - Configure
     
-    func configure(mainText: String? = nil, rightDetailText: String? = nil, subtitleText: String? = nil) {
+    func configure(mainText: String? = nil, rightDetailText: String? = nil, subtitleText: String? = nil, isCompleted: Bool) {
+        if isCompleted {
+            backgroundColor = CustomColors.greenColor
+            rightView.backgroundColor = CustomColors.greenColor
+        } else {
+            backgroundColor = CustomColors.lightOrangeColor
+            rightView.backgroundColor = CustomColors.lightBrownColor
+        }
+        
         if let mainText = mainText {
             mainLabel.text = mainText
         } else {
@@ -81,8 +96,7 @@ class RightDetailSubtitledView: UIView {
     
     // MARK: - Private methods
     
-    override func layoutSubviews() {
-        backgroundColor = CustomColors.lightOrangeColor
+    private func commonInit() {
         clipsToBounds = true
         layer.cornerRadius = 11
         
@@ -97,22 +111,20 @@ class RightDetailSubtitledView: UIView {
             make.trailing.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.width.equalTo(frame.width / 4)
+            make.width.equalTo(80)
         }
                 
         stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-8)
             make.leading.equalToSuperview().offset(16)
-            make.width.equalTo(frame.width / 2)
+            make.trailing.equalTo(rightView).offset(-5)
         }
 
         rightTextLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.equalTo(frame.width / 4)
+            make.width.equalTo(80)
         }
-        
-        super.layoutSubviews()
     }
 }

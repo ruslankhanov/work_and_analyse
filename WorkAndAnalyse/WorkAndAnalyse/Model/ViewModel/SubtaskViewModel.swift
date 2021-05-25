@@ -12,7 +12,7 @@ class SubtaskViewModel: CellViewModel {
     var title: String {
         subtask.title
     }
-
+    
     var rightDetailText: String {
         subtask.durationString
     }

@@ -27,6 +27,7 @@ class DatePickerCell: UITableViewCell, ConfigurableCell {
     
     private lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
+        datePicker.tintColor = CustomColors.lightOrangeColor
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker

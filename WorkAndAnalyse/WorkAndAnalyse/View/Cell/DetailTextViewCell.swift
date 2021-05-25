@@ -12,14 +12,13 @@ struct DetailTextViewCellConfiguration {
     var mainText: String?
     var subtitleText: String?
     var rightDetailText: String?
-    
-    var delegate: UITableViewDelegate?
-    var dataSource: UITableViewDataSource?
-    
-    init(mainText: String? = nil, subtitleText: String? = nil, rightDetailText: String? = nil) {
+    var isCompleted: Bool?
+
+    init(mainText: String? = nil, subtitleText: String? = nil, rightDetailText: String? = nil, isCompleted: Bool? = nil) {
         self.mainText = mainText
         self.subtitleText = subtitleText
         self.rightDetailText = rightDetailText
+        self.isCompleted = isCompleted
     }
 }
 
@@ -28,10 +27,19 @@ class DetailTextViewCell: UITableViewCell, ConfigurableCell {
     private var defaultView = RightDetailSubtitledView()
     
     func configure(with config: DetailTextViewCellConfiguration) {
-        defaultView.configure(mainText: config.mainText, rightDetailText: config.rightDetailText, subtitleText: config.subtitleText)
+        defaultView.configure(mainText: config.mainText, rightDetailText: config.rightDetailText, subtitleText: config.subtitleText, isCompleted: config.isCompleted ?? false)
     }
     
-    override func layoutSubviews() {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private func commonInit() {
         backgroundColor = .clear
         selectionStyle = .none
         
@@ -46,6 +54,5 @@ class DetailTextViewCell: UITableViewCell, ConfigurableCell {
             make.bottom.equalToSuperview().offset(-5)
         }
         
-        super.layoutSubviews()
     }
 }

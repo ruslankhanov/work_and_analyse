@@ -1,5 +1,5 @@
 //
-//  MyTasksViewModel.swift
+//  TaskListViewModel.swift
 //  WorkAndAnalyse
 //
 //  Created by Ruslan Khanov on 28.04.2021.
@@ -7,46 +7,32 @@
 
 import Foundation
 
-protocol MyTasksViewModelProtocol {
-    var dataToPresent: [SectionViewModel] { get set }
-    func loadDataToPresent()
-    func updateTask(with model: CellViewModel, at indexPath: IndexPath)
-}
-
-protocol MyTasksViewModelDelegate: class {
-    func didFailToLoadData(errorMessage: String)
-    func didLoadData()
-    func didUpdateData(in section: Int)
-    func didCompleteFullTask(alertTitle: String, alertMessage: String)
-}
-
-class MyTasksViewModel: MyTasksViewModelProtocol {
+class TaskListViewModel: TaskListViewModelProtocol {
     
     // MARK: - Vars & Lets
     var dataToPresent: [SectionViewModel] = []
-    weak var delegate: MyTasksViewModelDelegate?
+    weak var delegate: TaskListViewModelDelegate?
     
     private let taskService: TaskService
+    private let taskTypes: [TasksType]
     
     private var tasks: [Task] = []
     
     // MARK: - Init
-    
-    init(taskService: TaskService) {
+    init(taskService: TaskService, taskTypes: [TasksType]) {
         self.taskService = taskService
+        self.taskTypes = taskTypes
     }
     
     // MARK: - Public methods
     
     func loadDataToPresent() {
         dataToPresent = []
-        taskService.loadTasks(type: .missing) { [weak self] response in
-            guard let self = self else { return }
-            self.loadTasks(response: response, title: "Missing")
-        }
-        taskService.loadTasks(type: .next) { [weak self] response in
-            guard let self = self else { return }
-            self.loadTasks(response: response, title: "Next tasks")
+        for type in taskTypes {
+            taskService.loadTasks(type: type) { [weak self] response in
+                guard let self = self else { return }
+                self.loadTasks(response: response, title: type.rawValue)
+            }
         }
     }
     
@@ -56,7 +42,6 @@ class MyTasksViewModel: MyTasksViewModelProtocol {
         } else if let model = model as? TaskViewModel {
             updateTask(with: model, at: indexPath)
         }
-        delegate?.didUpdateData(in: indexPath.section)
     }
     
     // MARK: - Private methods
@@ -85,26 +70,34 @@ class MyTasksViewModel: MyTasksViewModelProtocol {
     }
     
     private func updateTask(with taskViewModel: TaskViewModel, at indexPath: IndexPath) {
-        taskViewModel.task.subtasks.forEach { $0.completed = true }
-        removeFromVisibleData(model: taskViewModel, indexPath: indexPath)
+        if taskViewModel.isCompleted {
+            taskViewModel.task.subtasks.forEach { $0.completed = false }
+        } else {
+            taskViewModel.task.subtasks.forEach { $0.completed = true }
+        }
         
-        delegate?.didCompleteFullTask(alertTitle: "Congratulations!", alertMessage: "You've just completed your task!")
+        var range = indexPath.row...indexPath.row
+        if !taskViewModel.isCollapsed {
+            range = indexPath.row...(indexPath.row + taskViewModel.children.count)
+        }
         
         updateTaskInDB(task: taskViewModel.task)
+        delegate?.didUpdateData(at: range.getIndexPaths(in: indexPath.section))
     }
     
     private func updateTask(with subtaskViewModel: SubtaskViewModel, at indexPath: IndexPath) {
+        guard let parent = subtaskViewModel.parent else { return }
+        
         subtaskViewModel.subtask.completed.toggle()
-            if let parent = subtaskViewModel.parent {
-                if parent.isCompleted {
-                    let index = dataToPresent[indexPath.section].cells.firstIndex { $0 === parent }
-                    
-                    guard index != nil else { return }
-                    removeFromVisibleData(model: parent, indexPath: IndexPath(row: index!, section: indexPath.section))
-                    delegate?.didCompleteFullTask(alertTitle: "Congratulations!", alertMessage: "You've just completed your task!")
-                }
-                updateTaskInDB(task: parent.task)
-            }
+        
+        var indexPathToUpdate = [indexPath]
+        let index = dataToPresent[indexPath.section].cells.firstIndex { $0 === parent }
+        
+        guard index != nil else { return }
+        indexPathToUpdate = [IndexPath(row: index!, section: indexPath.section), indexPath]
+        
+        updateTaskInDB(task: parent.task)
+        delegate?.didUpdateData(at: indexPathToUpdate)
     }
     
     private func updateTaskInDB(task: Task) {
@@ -113,14 +106,5 @@ class MyTasksViewModel: MyTasksViewModelProtocol {
                 self?.delegate?.didFailToLoadData(errorMessage: error.localizedDescription)
             }
         }
-    }
-    
-    private func removeFromVisibleData(model: TaskViewModel, indexPath: IndexPath) {
-        var range = indexPath.row...indexPath.row
-        if !model.isCollapsed {
-            range = indexPath.row...(indexPath.row + model.children.count)
-        }
-        
-        self.dataToPresent[indexPath.section].cells.removeSubrange(range)
     }
 }

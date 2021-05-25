@@ -1,5 +1,5 @@
 //
-//  MyTasksViewController.swift
+//  TaskListViewController.swift
 //  WorkAndAnalyse
 //
 //  Created by Ruslan Khanov on 28.04.2021.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class MyTasksViewController: BaseViewController {
+class TaskListViewController: BaseViewController {
     
     // MARK: - Vars & Lets
     
-    var viewModel: MyTasksViewModelProtocol!
+    var viewModel: TaskListViewModelProtocol!
     
     private var dataToPresent: [SectionViewModel] {
         viewModel.dataToPresent
@@ -29,7 +29,6 @@ class MyTasksViewController: BaseViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.hidesBarsOnSwipe = true
-        navigationItem.title = "My tasks"
         
         view.addSubview(tableView)
         
@@ -47,7 +46,7 @@ class MyTasksViewController: BaseViewController {
         viewModel.loadDataToPresent()
     }
 }
-extension MyTasksViewController: UITableViewDataSource {
+extension TaskListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         dataToPresent.count
     }
@@ -65,8 +64,8 @@ extension MyTasksViewController: UITableViewDataSource {
             cell?.configure(with: DetailTextViewCellConfiguration(
                                 mainText: taskModel?.title,
                                 subtitleText: taskModel?.subtitle,
-                                rightDetailText: taskModel?.rightDetailText))
-            cell?.setNeedsLayout()
+                                rightDetailText: taskModel?.rightDetailText,
+                                isCompleted: taskModel?.isCompleted))
             return cell ?? UITableViewCell()
         case .outlineCell:
             let subtaskModel = element as? SubtaskViewModel
@@ -77,11 +76,7 @@ extension MyTasksViewController: UITableViewDataSource {
     }
 }
 
-extension MyTasksViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-    }
+extension TaskListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         LabelSectionHeaderView.getView(with: viewModel.dataToPresent[section].title ?? "")
@@ -98,7 +93,7 @@ extension MyTasksViewController: UITableViewDelegate {
         
         if !element.children.isEmpty {
             let range = (indexPath.row + 1)...(indexPath.row + element.children.count)
-            let indexPaths = range.map { IndexPath(row: $0, section: indexPath.section) }
+            let indexPaths = range.getIndexPaths(in: indexPath.section)
             if element.isCollapsed {
                 dataToPresent[indexPath.section].cells.insert(contentsOf: element.children, at: indexPath.row + 1)
                 tableView.insertRows(at: indexPaths, with: .fade)
@@ -122,7 +117,7 @@ extension MyTasksViewController: UITableViewDelegate {
             completionHandler(true)
         }
         
-        if let model = element as? SubtaskViewModel, model.isCompleted {
+        if element.isCompleted {
             action.image = #imageLiteral(resourceName: "close").imageResized(to: CGSize(width: 40,height: 40))
         } else {
             action.image = #imageLiteral(resourceName: "check-mark-2").imageResized(to: CGSize(width: 40,height: 40))
@@ -134,7 +129,8 @@ extension MyTasksViewController: UITableViewDelegate {
     }
 }
 
-extension MyTasksViewController: MyTasksViewModelDelegate {
+extension TaskListViewController: TaskListViewModelDelegate {
+    
     func didFailToLoadData(errorMessage: String) {
         showAlert(title: "Error", message: errorMessage)
     }
@@ -143,11 +139,7 @@ extension MyTasksViewController: MyTasksViewModelDelegate {
         tableView.reloadData()
     }
     
-    func didUpdateData(in section: Int) {
-        tableView.reloadSections([section], with: .none)
-    }
-    
-    func didCompleteFullTask(alertTitle: String, alertMessage: String) {
-        showAlert(title: alertTitle, message: alertMessage)
+    func didUpdateData(at indexPaths: [IndexPath]) {
+        tableView.reloadRows(at: indexPaths, with: .left)
     }
 }

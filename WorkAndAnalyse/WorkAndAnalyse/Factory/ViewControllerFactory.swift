@@ -34,9 +34,8 @@ class ViewControllerFactory {
         return viewController
     }
     
-    func instantiateMyTasksViewController() -> MyTasksViewController {
-        let viewController = MyTasksViewController()
-        viewController.tabBarItem = UITabBarItem(title: "My tasks", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+    func instantiateTaskListViewController() -> TaskListViewController {
+        let viewController = TaskListViewController()
         return viewController
     }
     

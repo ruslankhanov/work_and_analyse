@@ -1,14 +1,13 @@
 //
-//  MyTasksCoordinator.swift
+//  CompletedTasksCoordinator.swift
 //  WorkAndAnalyse
 //
-//  Created by Ruslan Khanov on 28.04.2021.
+//  Created by Ruslan Khanov on 25.05.2021.
 //
 
-import Foundation
+import UIKit
 
-class MyTasksCoordinator: BaseCoordinator, CoordinatorFinishOutput {
-    
+class CompletedTasksCoordinator: BaseCoordinator {
     // MARK: - Vars & Lets
     // MARK: - CoordinatorFinishOutput
 
@@ -21,7 +20,7 @@ class MyTasksCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: - Coordinator
     
     override func start() {
-        showMyTasksViewController()
+        showCompletedTasksViewController()
     }
     
     // MARK: - Init
@@ -33,11 +32,14 @@ class MyTasksCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
     
     // MARK: - Private methods
+
     
-    private func showMyTasksViewController() {
-        let viewController = viewControllerFactory.instantiateMyTasksViewController()
+    private func showCompletedTasksViewController() {
+        let viewController = viewControllerFactory.instantiateTaskListViewController()
+        viewController.tabBarItem = UITabBarItem(title: "Completed", image: UIImage(systemName: "checkmark.circle"), tag: 2)
+        viewController.navigationItem.title = "Completed"
         
-        let viewModel = MyTasksViewModel(taskService: TaskServiceImplementation(repository: FirestoreTaskRepository()))
+        let viewModel = TaskListViewModel(taskService: TaskServiceImplementation(repository: FirestoreTaskRepository()), taskTypes: [.history])
         viewModel.delegate = viewController
         
         viewController.viewModel = viewModel

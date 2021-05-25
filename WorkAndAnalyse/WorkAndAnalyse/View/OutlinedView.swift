@@ -21,7 +21,7 @@ class OutlinedView: UIView {
     private lazy var rightTextLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = CustomFonts.openSans(size: 17, style: .bold)
+        label.font = CustomFonts.openSans(size: 17, style: .regular)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,10 +45,6 @@ class OutlinedView: UIView {
         } else {
             rightTextLabel.isHidden = true
         }
-    }
-    
-    override func layoutSubviews() {
-
     }
     
     private func commonInit() {
