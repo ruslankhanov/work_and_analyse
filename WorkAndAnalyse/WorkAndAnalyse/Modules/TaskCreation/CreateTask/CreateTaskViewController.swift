@@ -35,8 +35,7 @@ class CreateTaskViewController: BaseViewController {
         
         // Configure table view
         tableView.backgroundColor = CustomColors.darkBlueColor
-        
-        tableDirector = TableDirector(tableView: tableView)
+        setTableDirector()
         
         configureSections()
     }
@@ -48,7 +47,12 @@ class CreateTaskViewController: BaseViewController {
             $0.headerHeight = 45.0
         }
         
+        setTableDirector()
         tableDirector += viewModel.dataToPresent
+    }
+    
+    private func setTableDirector() {
+        tableDirector = TableDirector(tableView: tableView)
     }
 }
 
@@ -59,6 +63,10 @@ extension CreateTaskViewController: CreaTaskViewModelDelegate {
     
     func didFailTaskCreation(errorMessage: String) {
         showAlert(title: "Error", message: errorMessage)
+    }
+    
+    func didClearSceneData() {
+        configureSections()
     }
 }
 

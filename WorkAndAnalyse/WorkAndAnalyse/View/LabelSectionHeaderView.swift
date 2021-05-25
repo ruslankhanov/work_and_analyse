@@ -20,7 +20,7 @@ class LabelSectionHeaderView: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFonts.openSans(size: 25, style: .bold)
+        label.font = CustomFonts.openSans(size: 27, style: .bold)
         label.textColor = .white
         return label
     }()
@@ -42,8 +42,8 @@ class LabelSectionHeaderView: UIView {
     private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(25)
-            make.trailing.equalToSuperview().offset(-25)
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-15)
         }
     }
 }

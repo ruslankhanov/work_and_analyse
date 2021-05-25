@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import FirebaseAuth
 
 enum TasksType {
     typealias FilterStatement = (Task) -> Bool
@@ -18,9 +17,9 @@ enum TasksType {
     var filterStatement: FilterStatement {
         switch self {
         case .next:
-            return { $0.endTime <= Date() && !$0.completed }
+            return { $0.endTime >= Date() && !$0.completed }
         case .missing:
-            return { $0.endTime > Date() && !$0.completed }
+            return { $0.endTime < Date() && !$0.completed }
         case .history:
             return { $0.completed }
         }
@@ -28,24 +27,26 @@ enum TasksType {
 }
 
 class TaskServiceImplementation: TaskService {
-        
+
     private var repository: TaskRepository
     
     init(repository: TaskRepository) {
         self.repository = repository
     }
     
-    func loadTasks(type: TasksType) -> [DateComponents: [Task]]? {
-        let result = repository.tasks.filter(type.filterStatement)
-        return result.isEmpty ? nil : groupByDay(tasks: result)
+    func loadTasks(type: TasksType, completion: @escaping (Result<[Task], Error>) -> Void) {
+        repository.loadData(filter: type.filterStatement) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let tasks):
+                completion(.success(tasks))
+            }
+        }
     }
     
     func createTask(title: String, startTime: Date, subtasks: [Subtask], completion: @escaping (Error?) -> Void) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            return
-        }
-        
-        let task = Task(id: nil, userId: userId, title: title, startTime: startTime, subtasks: subtasks)
+        let task = Task(title: title, startTime: startTime, subtasks: subtasks)
         
         repository.addTask(task) { error in
             if let error = error {
@@ -55,11 +56,12 @@ class TaskServiceImplementation: TaskService {
         }
     }
     
-    // MARK: - Helpers
-    private func groupByDay(tasks: [Task]) -> [DateComponents: [Task]] {
-        let tasksGroupedByDay = Dictionary(grouping: tasks) { task in
-            return Calendar.current.dateComponents([.day, .month, .year], from: task.startTime)
+    func updateTask(task: Task, completion: @escaping (Error?) -> Void) {
+        repository.updateTask(task) { error in
+            if let error = error {
+                completion(error)
+                return
+            }
         }
-        return tasksGroupedByDay
     }
 }

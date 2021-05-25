@@ -13,6 +13,9 @@ struct DetailTextViewCellConfiguration {
     var subtitleText: String?
     var rightDetailText: String?
     
+    var delegate: UITableViewDelegate?
+    var dataSource: UITableViewDataSource?
+    
     init(mainText: String? = nil, subtitleText: String? = nil, rightDetailText: String? = nil) {
         self.mainText = mainText
         self.subtitleText = subtitleText
@@ -22,24 +25,25 @@ struct DetailTextViewCellConfiguration {
 
 class DetailTextViewCell: UITableViewCell, ConfigurableCell {
     
-    private var containerView: UIView = DetailTextView(style: .outline)
+    private var defaultView = RightDetailSubtitledView()
     
     func configure(with config: DetailTextViewCellConfiguration) {
-        containerView = DetailTextView(style: .filledWithRightDetail, mainText: config.mainText, rightDetailText: config.rightDetailText, subtitleText: config.subtitleText)
+        defaultView.configure(mainText: config.mainText, rightDetailText: config.rightDetailText, subtitleText: config.subtitleText)
     }
     
     override func layoutSubviews() {
         backgroundColor = .clear
         selectionStyle = .none
         
-        addSubview(containerView)
+        defaultView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.snp.makeConstraints { make in
-            make.height.equalTo(60)
-            make.topMargin.equalToSuperview().offset(5)
-            make.bottomMargin.equalToSuperview().offset(-5)
-            make.leadingMargin.equalToSuperview().offset(16)
-            make.trailingMargin.equalToSuperview().offset(-16)
+        contentView.addSubview(defaultView)
+    
+        defaultView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-5)
         }
         
         super.layoutSubviews()

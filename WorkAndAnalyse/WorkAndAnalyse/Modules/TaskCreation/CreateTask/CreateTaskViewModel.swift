@@ -10,6 +10,7 @@ import TableKit
 protocol CreaTaskViewModelDelegate: class {
     func didUpdateData()
     func didFailTaskCreation(errorMessage: String)
+    func didClearSceneData()
 }
 
 protocol CreateTaskViewModelOutput {
@@ -46,8 +47,6 @@ class CreateTaskViewModel: CreateTaskViewModelProtocol, CreateTaskViewModelOutpu
     }
     
     // MARK: - Public methods
-    
-    
     
     // MARK: - Private methods
     
@@ -110,7 +109,19 @@ class CreateTaskViewModel: CreateTaskViewModelProtocol, CreateTaskViewModelOutpu
             }
         }
         
+        clearModel()
         onFinish?()
+    }
+    
+    private func clearModel() {
+        title = nil
+        startTime = Date()
+        subtasks = []
+        dataToPresent = []
+        
+        loadSectionData()
+        
+        delegate?.didClearSceneData()
     }
 }
 

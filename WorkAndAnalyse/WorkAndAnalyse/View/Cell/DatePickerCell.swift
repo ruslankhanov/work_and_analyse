@@ -25,21 +25,14 @@ class DatePickerCell: UITableViewCell, ConfigurableCell {
         datePicker.date
     }
     
-    private var titleText: String! {
-        didSet {
-            containerView = DetailTextView(style: .outline, mainText: titleText)
-        }
-    }
-    
     private lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
-        datePicker.tintColor = .white
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
     
-    private var containerView: UIView = DetailTextView(style: .outline)
+    private var containerView = OutlinedView()
     
     override func layoutSubviews() {
         backgroundColor = .clear
@@ -69,7 +62,7 @@ class DatePickerCell: UITableViewCell, ConfigurableCell {
     func configure(with config: DatePickerCellConfiguration) {
         datePicker.datePickerMode = config.mode
         datePicker.preferredDatePickerStyle = config.style
-        titleText = config.text
+        containerView.configure(text: config.text)
     }
     
     @objc func dateChanged() {

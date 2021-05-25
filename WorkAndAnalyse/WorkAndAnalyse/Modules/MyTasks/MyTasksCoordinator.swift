@@ -36,6 +36,11 @@ class MyTasksCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
     private func showMyTasksViewController() {
         let viewController = viewControllerFactory.instantiateMyTasksViewController()
+        
+        let viewModel = MyTasksViewModel(taskService: TaskServiceImplementation(repository: FirestoreTaskRepository()))
+        viewModel.delegate = viewController
+        
+        viewController.viewModel = viewModel
         router.setRootModule(viewController)
     }
 }

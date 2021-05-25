@@ -8,9 +8,8 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Task: Codable {
+class Task: Codable {
     @DocumentID var id: String?
-    var userId: String
     var title: String
     var startTime: Date
     var subtasks: [Subtask]
@@ -29,14 +28,28 @@ struct Task: Codable {
     var endTime: Date {
         Date(timeInterval: duration, since: startTime)
     }
+    
+    init(title: String, startTime: Date, subtasks: [Subtask]) {
+        self.title = title
+        self.startTime = startTime
+        self.subtasks = subtasks
+    }
 }
 
-struct Subtask: Codable {
+class Subtask: Codable {
     var title: String
     var duration: TimeInterval
     var completed: Bool
     
+    weak var parent: Task?
+    
     var durationString: String {
         duration.stringFromTimeInterval()
+    }
+    
+    init(title: String, duration: TimeInterval, completed: Bool) {
+        self.title = title
+        self.duration = duration
+        self.completed = completed
     }
 }

@@ -12,60 +12,88 @@ import FirebaseFirestoreSwift
 class FirestoreTaskRepository: TaskRepository {
     
     var db = Firestore.firestore()
+    var encoder = JSONEncoder()
     
-    var tasks: [Task] = []
-    
-    init() {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.loadData()
-        }
+    var currentUser: User? {
+        return Auth.auth().currentUser
     }
     
     // MARK: - CRUD
     
-    func loadData() {
-        let docsRef = db.collection("tasks").whereField("userId", in: [Auth.auth().currentUser?.uid]).order(by: "startTime")
+    func loadData(filter: ((Task) -> Bool)?, completion: @escaping (Result<[Task], Error>) -> Void) {
+        guard let uid = currentUser?.uid else {
+            return // some error
+        }
         
-        docsRef.getDocuments { [unowned self] querySnapshot, error in
-            guard error == nil else { return }
+        let docsRef = db
+            .collection("users").document(uid)
+            .collection("tasks").order(by: "startTime", descending: false)
+        
+        var tasks: [Task] = []
+        
+        docsRef.getDocuments { querySnapshot, error in
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
             
             if let querySnapshot = querySnapshot {
                 for document in querySnapshot.documents {
                     do {
-                        let task = try document.data(as: Task.self)
-                        
-                        if let task = task {
-                            tasks.append(task)
+                        if let task = try document.data(as: Task.self) {
+                            if let filter = filter {
+                                if filter(task) {
+                                    tasks.append(task)
+                                }
+                            } else {
+                                tasks.append(task)
+                            }
                         }
                     } catch {
-                        print("Some tasks did not load.")
+                        completion(.failure(error))
                     }
                 }
+                
+                completion(.success(tasks))
             }
-            
         }
     }
     
     func addTask(_ task: Task, completion: @escaping (Error?) -> Void) {
-        let collectionRef = db.collection("tasks")
+        guard let uid = currentUser?.uid else {
+            return // some error
+        }
+        
+        let documentRef = db
+            .collection("users").document(uid)
+            .collection("tasks")
+        
         do {
-            try collectionRef.addDocument(from: task)
+            print(try documentRef.addDocument(from: task))
         } catch {
             completion(error)
         }
     }
     
     func removeTask(_ task: Task, completion: @escaping (Error?) -> Void) {
-        guard let taskId = task.id else {
-            //completion(.failure())
-            return
-        }
-        
-        db.collection("tasks").document(taskId).delete { (error) in // (1)
+        db.collection("tasks").document(task.id ?? "").delete { (error) in // (1)
             if let error = error {
                 completion(error)
                 return
             }
+        }
+    }
+    
+    func updateTask(_ task: Task, completion: @escaping (Error?) -> Void) {
+        guard let uid = currentUser?.uid, let id = task.id else {
+            return // some error
+        }
+        
+        do {
+            try db.collection("users").document(uid)
+            .collection("tasks").document(id).setData(from: task)
+        } catch {
+            completion(error)
         }
     }
 }
