@@ -37,7 +37,7 @@ class AuthCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private func showSignInViewController() {
         let viewController = viewControllerFactory.instantiateSignInViewController()
         
-        let viewModel = SignInViewModel(loginService: FirebaseLoginService())
+        let viewModel = SignInViewModel(loginService: FirebaseLoginService.shared)
         
         viewController.onGoToSignUp = { [unowned self] in
             self.showSignUpViewController()
@@ -62,7 +62,7 @@ class AuthCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private func showSignUpViewController() {
         let viewController = viewControllerFactory.instantiateSignUpViewController()
         
-        let viewModel = SignUpViewModel(registrationService: FirebaseRegistrationService())
+        let viewModel = SignUpViewModel(registrationService: FirebaseRegistrationService.shared)
 
         viewModel.finishSignUp = { [unowned self, weak viewController] in
             viewController?.showAlert(title: "Success", message: "You've successfully created your account.")

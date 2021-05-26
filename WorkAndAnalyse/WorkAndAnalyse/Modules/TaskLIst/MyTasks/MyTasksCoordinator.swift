@@ -7,12 +7,9 @@
 
 import UIKit
 
-class MyTasksCoordinator: BaseCoordinator, CoordinatorFinishOutput {
+class MyTasksCoordinator: BaseCoordinator {
     
     // MARK: - Vars & Lets
-    // MARK: - CoordinatorFinishOutput
-
-    var finishFlow: (() -> Void)?
     
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
@@ -36,10 +33,10 @@ class MyTasksCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
     private func showMyTasksViewController() {
         let viewController = viewControllerFactory.instantiateTaskListViewController()
-        viewController.tabBarItem = UITabBarItem(title: "My tasks", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        viewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person.crop.circle"), tag: 1)
         viewController.navigationItem.title = "My tasks"
         
-        let viewModel = TaskListViewModel(taskService: TaskServiceImplementation(repository: FirestoreTaskRepository()), taskTypes: [.missing, .next])
+        let viewModel = TaskListViewModel(taskService: TaskServiceImplementation.shared, taskTypes: [.missing, .next])
         viewModel.delegate = viewController
         viewModel.noDataText = "No tasks to complete :("
         

@@ -66,10 +66,7 @@ class OutlinedCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-40)
         }
         acceptedView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().offset(-5)
-            make.leading.equalToSuperview().offset(25)
-            make.trailing.equalToSuperview().offset(-40)
+            make.edges.equalTo(containerView)
         }
     }
 

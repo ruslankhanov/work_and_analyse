@@ -1,13 +1,14 @@
 //
-//  CompletedTasksCoordinator.swift
+//  SettingsCoordinator.swift
 //  WorkAndAnalyse
 //
-//  Created by Ruslan Khanov on 25.05.2021.
+//  Created by Ruslan Khanov on 26.05.2021.
 //
 
 import UIKit
 
-class CompletedTasksCoordinator: BaseCoordinator {
+class SettingsCoordinator: BaseCoordinator {
+    
     // MARK: - Vars & Lets
     
     private let router: RouterProtocol
@@ -17,7 +18,7 @@ class CompletedTasksCoordinator: BaseCoordinator {
     // MARK: - Coordinator
     
     override func start() {
-        showCompletedTasksViewController()
+        showSettingsController()
     }
     
     // MARK: - Init
@@ -29,16 +30,14 @@ class CompletedTasksCoordinator: BaseCoordinator {
     }
     
     // MARK: - Private methods
-
     
-    private func showCompletedTasksViewController() {
-        let viewController = viewControllerFactory.instantiateTaskListViewController()
-        viewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "checkmark.circle"), tag: 2)
-        viewController.navigationItem.title = "Completed"
+    private func showSettingsController() {
+        let viewController = viewControllerFactory.instantiateSettingsViewController()
+        viewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "gearshape"), tag: 3)
+        viewController.navigationItem.title = "Settings"
         
-        let viewModel = TaskListViewModel(taskService: TaskServiceImplementation.shared, taskTypes: [.history])
+        let viewModel = SettingsViewModel(loginService: FirebaseLoginService.shared, taskService: TaskServiceImplementation.shared)
         viewModel.delegate = viewController
-        viewModel.noDataText = "You haven't completed any task :("
         
         viewController.viewModel = viewModel
         router.setRootModule(viewController)

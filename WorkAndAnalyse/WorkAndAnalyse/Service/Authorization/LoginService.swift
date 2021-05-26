@@ -7,5 +7,5 @@
 
 protocol LoginService {
     func signIn(email: String, password: String, completion: @escaping (AuthorizationResponse) -> Void)
-    
+    func signOut(completion: @escaping (Error?) -> Void)
 }

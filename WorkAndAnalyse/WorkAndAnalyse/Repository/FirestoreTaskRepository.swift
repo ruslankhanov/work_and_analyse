@@ -11,10 +11,12 @@ import FirebaseFirestoreSwift
 
 class FirestoreTaskRepository: TaskRepository {
     
-    var db = Firestore.firestore()
-    var encoder = JSONEncoder()
+    static let shared = FirestoreTaskRepository()
     
-    var currentUser: User? {
+    private var db = Firestore.firestore()
+    private var encoder = JSONEncoder()
+    
+    private var currentUser: User? {
         return Auth.auth().currentUser
     }
     
@@ -94,6 +96,34 @@ class FirestoreTaskRepository: TaskRepository {
             .collection("tasks").document(id).setData(from: task)
         } catch {
             completion(error)
+        }
+    }
+    
+    func removeAllTasks(completion: ((Error?) -> Void)?) {
+        let batchSize = 100
+        
+        guard let uid = currentUser?.uid else {
+            return // some error
+        }
+        
+        let documentRef = db
+            .collection("users").document(uid)
+            .collection("tasks").limit(to: batchSize)
+        
+        documentRef.getDocuments { [weak self] querySnapshot, error in
+            guard error == nil else {
+                completion?(error!)
+                return
+            }
+            
+            let batch = documentRef.firestore.batch()
+            querySnapshot?.documents.forEach { batch.deleteDocument($0.reference) }
+            
+            completion?(nil)
+            
+            batch.commit {_ in
+                self?.removeAllTasks(completion: nil)
+            }
         }
     }
 }

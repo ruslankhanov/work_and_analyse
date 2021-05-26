@@ -27,6 +27,8 @@ enum TasksType: String {
 }
 
 class TaskServiceImplementation: TaskService {
+    
+    static let shared = TaskServiceImplementation(repository: FirestoreTaskRepository.shared)
 
     private var repository: TaskRepository
     
@@ -63,5 +65,9 @@ class TaskServiceImplementation: TaskService {
                 return
             }
         }
+    }
+    
+    func clearData(completion: ((Error?) -> Void)?) {
+        repository.removeAllTasks(completion: completion)
     }
 }

@@ -34,7 +34,7 @@ class TaskCreationCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: - Private methods
     
     private func showCreateTaskViewController() {
-        let viewModel = CreateTaskViewModel(taskService: TaskServiceImplementation(repository: FirestoreTaskRepository()))
+        let viewModel = CreateTaskViewModel(taskService: TaskServiceImplementation.shared)
         viewModel.onGoToSubtaskCreation = { [unowned viewModel, unowned self] in
             showCreateSubtaskViewController(delegate: viewModel)
         }
@@ -43,6 +43,7 @@ class TaskCreationCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
         
         let viewController = viewControllerFactory.instantiateCreateTaskViewController()
+        viewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "plus"), tag: 0)
         
         viewModel.delegate = viewController
         

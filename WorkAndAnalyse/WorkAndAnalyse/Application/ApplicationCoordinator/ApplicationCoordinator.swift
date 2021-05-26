@@ -33,6 +33,9 @@ final class ApplicationCoordinator: BaseCoordinator {
     init(router: Router, coordinatorFactory: CoordinatorFactory) {
         self.router = router
         self.coordinatorFactory = coordinatorFactory
+        super.init()
+        
+        addObserver()
     }
     
     // MARK: - Private methods
@@ -51,5 +54,14 @@ final class ApplicationCoordinator: BaseCoordinator {
     private func runMainFlow() {
         let module = viewControllerFactory.instantiateMainTabBarController(coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
         router.setRootModule(module, hideBar: true)
+    }
+    
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didFinishMainFlow), name: .didSignOut, object: nil)
+    }
+    
+    @objc func didFinishMainFlow() {
+        self.launchInstructor = LaunchInstructor.configure()
+        self.start()
     }
 }

@@ -43,7 +43,9 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let completedTasksCoordinator = coordinatorFactory.makeCompletedTasksCoordinator(navigationController: UINavigationController(), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
         
-        coordinators = [taskCreationCoordinator, myTasksCoordinator, completedTasksCoordinator]
+        let settingsCoordinator = coordinatorFactory.makeSettingsCoordinator(navigationController: UINavigationController(), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
+        
+        coordinators = [taskCreationCoordinator, myTasksCoordinator, completedTasksCoordinator, settingsCoordinator]
         
         coordinators.forEach {
             $0.0.start()

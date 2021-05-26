@@ -10,6 +10,8 @@ import Firebase
 
 class FirebaseRegistrationService: RegistrationService {
     
+    static let shared = FirebaseRegistrationService()
+    
     func signUp(email: String, username: String, password: String, passwordConfirmation: String, completion: @escaping ((AuthorizationResponse) -> Void)) {
         
         let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -36,21 +38,21 @@ class FirebaseRegistrationService: RegistrationService {
             }
             
             // TODO: Write user data to database
-             
-            guard let uid = result?.user.uid else {
-                return completion(.failure(message: "Cannot get user's uid."))
-            }
-            
-            let db = Firestore.firestore()
-            
-            db.collection("users").document(uid).setData([
-                "id": uid,
-                "username": cleanUsername
-            ]) { error in
-                if error != nil {
-                    return completion(.failure(message: "Cannot save user data"))
-                }
-            }
+//
+//            guard let uid = result?.user.uid else {
+//                return completion(.failure(message: "Cannot get user's uid."))
+//            }
+//
+//            let db = Firestore.firestore()
+//
+//            db.collection("users").document(uid).setData([
+//                "id": uid,
+//                "username": cleanUsername
+//            ]) { error in
+//                if error != nil {
+//                    return completion(.failure(message: "Cannot save user data"))
+//                }
+//            }
             
             completion(.success)
         }

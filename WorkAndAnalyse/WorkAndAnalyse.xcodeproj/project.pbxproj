@@ -29,7 +29,6 @@
 		ED3EF90B260CBF6500C41119 /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3EF90A260CBF6400C41119 /* CreateTaskViewModel.swift */; };
 		ED409F4C2659A52300BD9797 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED409F4B2659A52300BD9797 /* CellViewModel.swift */; };
 		ED409F52265AA68800BD9797 /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED409F51265AA68800BD9797 /* CellType.swift */; };
-		ED409F55265AAD2D00BD9797 /* SimpleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED409F54265AAD2D00BD9797 /* SimpleTitleCell.swift */; };
 		ED409F58265B207200BD9797 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED409F57265B207200BD9797 /* UIImage+Resize.swift */; };
 		ED409F5E265B40D600BD9797 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED409F5D265B40D600BD9797 /* Date+ToString.swift */; };
 		ED409F65265B4C2300BD9797 /* OutlinedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED409F64265B4C2300BD9797 /* OutlinedView.swift */; };
@@ -86,6 +85,12 @@
 		EDFD053525FA404700B8988F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD053425FA404700B8988F /* SignUpViewModel.swift */; };
 		EDFF090D265D8267008DA975 /* CompletedTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF090C265D8267008DA975 /* CompletedTasksCoordinator.swift */; };
 		EDFF0911265D8A64008DA975 /* ClosedRange+ToIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0910265D8A64008DA975 /* ClosedRange+ToIndexPath.swift */; };
+		EDFF0916265DD467008DA975 /* SettingElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0915265DD466008DA975 /* SettingElementViewModel.swift */; };
+		EDFF0919265DD4D9008DA975 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0918265DD4D9008DA975 /* SettingsViewModel.swift */; };
+		EDFF091C265E5617008DA975 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF091B265E5617008DA975 /* SettingsViewController.swift */; };
+		EDFF091F265E5D4B008DA975 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF091E265E5D4B008DA975 /* SettingsCoordinator.swift */; };
+		EDFF0922265E7DD1008DA975 /* UIButton+SetColorForState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0921265E7DD1008DA975 /* UIButton+SetColorForState.swift */; };
+		EDFF0925265E83C9008DA975 /* Notification.Name+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0924265E83C9008DA975 /* Notification.Name+CustomNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,7 +118,6 @@
 		ED3EF90A260CBF6400C41119 /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
 		ED409F4B2659A52300BD9797 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		ED409F51265AA68800BD9797 /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
-		ED409F54265AAD2D00BD9797 /* SimpleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTitleCell.swift; sourceTree = "<group>"; };
 		ED409F57265B207200BD9797 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		ED409F5D265B40D600BD9797 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		ED409F64265B4C2300BD9797 /* OutlinedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedView.swift; sourceTree = "<group>"; };
@@ -172,6 +176,12 @@
 		EDFD053425FA404700B8988F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		EDFF090C265D8267008DA975 /* CompletedTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksCoordinator.swift; sourceTree = "<group>"; };
 		EDFF0910265D8A64008DA975 /* ClosedRange+ToIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosedRange+ToIndexPath.swift"; sourceTree = "<group>"; };
+		EDFF0915265DD466008DA975 /* SettingElementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingElementViewModel.swift; sourceTree = "<group>"; };
+		EDFF0918265DD4D9008DA975 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		EDFF091B265E5617008DA975 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		EDFF091E265E5D4B008DA975 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		EDFF0921265E7DD1008DA975 /* UIButton+SetColorForState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetColorForState.swift"; sourceTree = "<group>"; };
+		EDFF0924265E83C9008DA975 /* Notification.Name+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+CustomNames.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +229,7 @@
 				ED409F4B2659A52300BD9797 /* CellViewModel.swift */,
 				ED409F51265AA68800BD9797 /* CellType.swift */,
 				ED409F6D265B642500BD9797 /* SubtaskViewModel.swift */,
+				EDFF0915265DD466008DA975 /* SettingElementViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -335,6 +346,8 @@
 				ED409F5D265B40D600BD9797 /* Date+ToString.swift */,
 				ED409F70265C25CD00BD9797 /* Collection+SafeAccess.swift */,
 				EDFF0910265D8A64008DA975 /* ClosedRange+ToIndexPath.swift */,
+				EDFF0921265E7DD1008DA975 /* UIButton+SetColorForState.swift */,
+				EDFF0924265E83C9008DA975 /* Notification.Name+CustomNames.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -388,7 +401,6 @@
 				ED268F6C2635D1BE006AFDDD /* StandartTextFieldCell.swift */,
 				ED268F732635F1B5006AFDDD /* DatePickerCell.swift */,
 				EDEAE26E26377B050010FDFE /* DetailTextViewCell.swift */,
-				ED409F54265AAD2D00BD9797 /* SimpleTitleCell.swift */,
 				ED409F67265B4F2200BD9797 /* OutlinedCell.swift */,
 			);
 			path = Cell;
@@ -499,6 +511,7 @@
 		EDF5F32025F91F16007CD5C1 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EDFF0913265DD21B008DA975 /* Settings */,
 				ED409F7C265D6D8600BD9797 /* TaskLIst */,
 				EDF5F32125F92000007CD5C1 /* Authorization */,
 				EDAC85DD26024F1C00F6D871 /* TaskCreation */,
@@ -553,6 +566,16 @@
 				EDFF090C265D8267008DA975 /* CompletedTasksCoordinator.swift */,
 			);
 			path = CompletedTasks;
+			sourceTree = "<group>";
+		};
+		EDFF0913265DD21B008DA975 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EDFF0918265DD4D9008DA975 /* SettingsViewModel.swift */,
+				EDFF091B265E5617008DA975 /* SettingsViewController.swift */,
+				EDFF091E265E5D4B008DA975 /* SettingsCoordinator.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -685,7 +708,6 @@
 				ED268F6D2635D1BE006AFDDD /* StandartTextFieldCell.swift in Sources */,
 				ED409F4C2659A52300BD9797 /* CellViewModel.swift in Sources */,
 				ED409F5E265B40D600BD9797 /* Date+ToString.swift in Sources */,
-				ED409F55265AAD2D00BD9797 /* SimpleTitleCell.swift in Sources */,
 				ED268F692635A290006AFDDD /* AddSubtaskViewModel.swift in Sources */,
 				ED409F58265B207200BD9797 /* UIImage+Resize.swift in Sources */,
 				ED409F68265B4F2200BD9797 /* OutlinedCell.swift in Sources */,
@@ -693,10 +715,13 @@
 				EDAC85E326024F7400F6D871 /* TaskCreationCoordinator.swift in Sources */,
 				EDEAE28926389E890010FDFE /* TaskServiceImplementation.swift in Sources */,
 				ED820072260F57D800B89F80 /* ApplicationCoordinator.swift in Sources */,
+				EDFF0916265DD467008DA975 /* SettingElementViewModel.swift in Sources */,
 				ED268F742635F1B5006AFDDD /* DatePickerCell.swift in Sources */,
 				ED409F52265AA68800BD9797 /* CellType.swift in Sources */,
 				EDAC85CC2600FD4200F6D871 /* SignInViewModel.swift in Sources */,
 				EDFF0911265D8A64008DA975 /* ClosedRange+ToIndexPath.swift in Sources */,
+				EDFF091F265E5D4B008DA975 /* SettingsCoordinator.swift in Sources */,
+				EDFF091C265E5617008DA975 /* SettingsViewController.swift in Sources */,
 				EDFF090D265D8267008DA975 /* CompletedTasksCoordinator.swift in Sources */,
 				ED31CB4E263962B8001CDD23 /* TaskViewModel.swift in Sources */,
 				EDAC85C92600F0C500F6D871 /* UIViewController+Alert.swift in Sources */,
@@ -710,10 +735,12 @@
 				ED820088260F8F3400B89F80 /* CoordinatorFinishOutput.swift in Sources */,
 				ED31CB512639646F001CDD23 /* TaskListViewModel.swift in Sources */,
 				ED4FA65D25E82EF200C6E04D /* CustomFonts.swift in Sources */,
+				EDFF0925265E83C9008DA975 /* Notification.Name+CustomNames.swift in Sources */,
 				ED4FA66225E8317400C6E04D /* SignInViewController.swift in Sources */,
 				EDEAE26F26377B050010FDFE /* DetailTextViewCell.swift in Sources */,
 				EDEAE277263875560010FDFE /* TaskRepository.swift in Sources */,
 				ED77B7CF25F4A19E000BFF44 /* AuthCoordinator.swift in Sources */,
+				EDFF0919265DD4D9008DA975 /* SettingsViewModel.swift in Sources */,
 				ED362AB12611D9A7008DB051 /* MainTabBarController.swift in Sources */,
 				ED409F71265C25CD00BD9797 /* Collection+SafeAccess.swift in Sources */,
 				ED820085260F8DCD00B89F80 /* RouterProtocol.swift in Sources */,
@@ -735,6 +762,7 @@
 				ED4FA67925E8E49000C6E04D /* UIColor+Hex.swift in Sources */,
 				ED820060260F53D600B89F80 /* BaseCoordinator.swift in Sources */,
 				ED4FA68125E8EB1E00C6E04D /* CustomColors.swift in Sources */,
+				EDFF0922265E7DD1008DA975 /* UIButton+SetColorForState.swift in Sources */,
 				ED268F792636A652006AFDDD /* RightDetailSubtitledView.swift in Sources */,
 				ED4FA67E25E8E6D900C6E04D /* StyledButton.swift in Sources */,
 				ED4D182C2613812C00F28495 /* AddSubtaskViewController.swift in Sources */,

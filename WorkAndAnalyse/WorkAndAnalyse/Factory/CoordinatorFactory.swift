@@ -15,6 +15,8 @@ protocol CoordinatorFactoryProtocol {
     func makeMyTasksCoordinator(navigationController: UINavigationController, coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) -> (MyTasksCoordinator, UINavigationController)
     
     func makeCompletedTasksCoordinator(navigationController: UINavigationController, coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) -> (CompletedTasksCoordinator, UINavigationController)
+    
+    func makeSettingsCoordinator(navigationController: UINavigationController, coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) -> (SettingsCoordinator, UINavigationController)
 }
 
 final class CoordinatorFactory: CoordinatorFactoryProtocol {
@@ -38,6 +40,11 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
     
     func makeCompletedTasksCoordinator(navigationController: UINavigationController, coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) -> (CompletedTasksCoordinator, UINavigationController) {
         let coordinator = CompletedTasksCoordinator(router: Router(rootController: navigationController), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
+        return (coordinator, navigationController)
+    }
+    
+    func makeSettingsCoordinator(navigationController: UINavigationController, coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) -> (SettingsCoordinator, UINavigationController) {
+        let coordinator = SettingsCoordinator(router: Router(rootController: navigationController), coordinatorFactory: coordinatorFactory, viewControllerFactory: viewControllerFactory)
         return (coordinator, navigationController)
     }
 }

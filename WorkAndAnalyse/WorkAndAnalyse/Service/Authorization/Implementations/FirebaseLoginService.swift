@@ -8,7 +8,9 @@
 import FirebaseAuth
 
 class FirebaseLoginService: LoginService {
-        
+    
+    static let shared = FirebaseLoginService()
+
     func signIn(email: String, password: String, completion: @escaping (AuthorizationResponse) -> Void) {
         
         let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -33,7 +35,18 @@ class FirebaseLoginService: LoginService {
         }        
     }
     
-    fileprivate func validateStrings(email: String, password: String) -> AuthorizationError? {
+    func signOut(completion: @escaping (Error?) -> Void) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            completion(nil)
+        } catch let signOutError as NSError {
+            completion(signOutError)
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
+    private func validateStrings(email: String, password: String) -> AuthorizationError? {
         
         if email == "" || password == "" {
             return .oneOrMoreValuesAreEmprty

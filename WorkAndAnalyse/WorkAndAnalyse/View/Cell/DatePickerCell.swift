@@ -35,7 +35,26 @@ class DatePickerCell: UITableViewCell, ConfigurableCell {
     
     private var containerView = OutlinedView()
     
-    override func layoutSubviews() {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func configure(with config: DatePickerCellConfiguration) {
+        datePicker.datePickerMode = config.mode
+        datePicker.preferredDatePickerStyle = config.style
+        containerView.configure(text: config.text)
+    }
+    
+    @objc func dateChanged() {
+        TableCellAction(key: DatePickerCellActions.selectedValueChanged, sender: self).invoke()
+    }
+    
+    private func commonInit() {
         backgroundColor = .clear
         selectionStyle = .none
         
@@ -52,22 +71,10 @@ class DatePickerCell: UITableViewCell, ConfigurableCell {
         
         datePicker.snp.makeConstraints { make in
             make.topMargin.equalToSuperview().offset(5)
-            make.width.equalTo(200)
+            make.width.equalTo(230)
             make.bottomMargin.equalToSuperview().offset(-5)
             make.trailingMargin.equalToSuperview().offset(-5)
         }
-        
-        super.layoutSubviews()
-    }
-    
-    func configure(with config: DatePickerCellConfiguration) {
-        datePicker.datePickerMode = config.mode
-        datePicker.preferredDatePickerStyle = config.style
-        containerView.configure(text: config.text)
-    }
-    
-    @objc func dateChanged() {
-        TableCellAction(key: DatePickerCellActions.selectedValueChanged, sender: self).invoke()
     }
 
 }
