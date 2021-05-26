@@ -31,7 +31,7 @@ class SignUpViewController: ScrollableViewController {
     
     private let passwordTextField: UITextField = {
         let textField = StyledTextField()
-        //textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = true
         textField.setStyle(style: .outline)
         textField.setPlaceholder("Password")
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +40,7 @@ class SignUpViewController: ScrollableViewController {
     
     private let confirmPasswordTextField: UITextField = {
         let textField = StyledTextField()
-        //textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = true
         textField.setStyle(style: .outline)
         textField.setPlaceholder("Confirm password")
         textField.translatesAutoresizingMaskIntoConstraints = false

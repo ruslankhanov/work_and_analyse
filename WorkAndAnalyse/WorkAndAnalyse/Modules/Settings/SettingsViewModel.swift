@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol SettingsViewModelProtocol {
     var dataToPresent: [TitledClosure]! { get set }
+    var userName: String { get set }
 }
 
 protocol SettingsViewModelDelegate: class {
@@ -16,6 +18,10 @@ protocol SettingsViewModelDelegate: class {
 
 class SettingsViewModel: SettingsViewModelProtocol {
     var dataToPresent: [TitledClosure]!
+    
+    var userName: String = {
+        "Hello, " + (Auth.auth().currentUser?.displayName ?? "user") + "!"
+    }()
     
     weak var delegate: SettingsViewModelDelegate?
     

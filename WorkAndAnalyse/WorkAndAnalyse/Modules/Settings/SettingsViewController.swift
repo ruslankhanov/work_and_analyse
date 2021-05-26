@@ -11,6 +11,14 @@ class SettingsViewController: BaseViewController {
     
     var viewModel: SettingsViewModelProtocol!
     
+    private lazy var usernameLabel: UILabel = {
+        let label = UILabel()
+        label.font = CustomFonts.openSans(size: 27, style: .bold)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -26,8 +34,14 @@ class SettingsViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         view.addSubview(stackView)
+        view.addSubview(usernameLabel)
         loadUIForData()
         
+        usernameLabel.snp.makeConstraints { (make) in
+            make.topMargin.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
@@ -46,6 +60,8 @@ class SettingsViewController: BaseViewController {
                 make.height.equalTo(60)
             }
         }
+        
+        usernameLabel.text = viewModel.userName
     }
 }
 

@@ -37,24 +37,17 @@ class FirebaseRegistrationService: RegistrationService {
                 return
             }
             
-            // TODO: Write user data to database
-//
-//            guard let uid = result?.user.uid else {
-//                return completion(.failure(message: "Cannot get user's uid."))
-//            }
-//
-//            let db = Firestore.firestore()
-//
-//            db.collection("users").document(uid).setData([
-//                "id": uid,
-//                "username": cleanUsername
-//            ]) { error in
-//                if error != nil {
-//                    return completion(.failure(message: "Cannot save user data"))
-//                }
-//            }
-            
-            completion(.success)
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = cleanUsername
+            changeRequest?.commitChanges { (error) in
+                if let error = error {
+                    completion(.failure(message: error.localizedDescription))
+                    return
+                }
+                completion(.success)
+
+            }
+
         }
     }
     
