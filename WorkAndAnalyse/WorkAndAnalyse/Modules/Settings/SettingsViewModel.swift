@@ -8,15 +8,14 @@
 import Foundation
 
 protocol SettingsViewModelProtocol {
-    var dataToPresent: [SettingElementViewModel]! { get set }
+    var dataToPresent: [TitledClosure]! { get set }
 }
 
 protocol SettingsViewModelDelegate: class {
-    func showAlert(title: String, message: String)
 }
 
 class SettingsViewModel: SettingsViewModelProtocol {
-    var dataToPresent: [SettingElementViewModel]!
+    var dataToPresent: [TitledClosure]!
     
     weak var delegate: SettingsViewModelDelegate?
     
@@ -31,8 +30,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
     
     private func loadData() {
         dataToPresent = [
-            SettingElementViewModel(title: "Clear all data", isEnabled: true) { [weak self] in
-                //self?.delegate?.showAlert(title: "", message: <#T##String#>)
+            TitledClosure(title: "Clear all data (WARNING)") { [weak self] in
                 self?.taskService.clearData() { (error) in
                     guard error == nil else {
                         print(error.debugDescription)
@@ -40,7 +38,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                     }
                 }
             },
-            SettingElementViewModel(title: "Sign out", isEnabled: true) { [weak self] in
+            TitledClosure(title: "Sign out") { [weak self] in
                 self?.loginService.signOut() { (error) in
                     guard error == nil else {
                         print(error.debugDescription)

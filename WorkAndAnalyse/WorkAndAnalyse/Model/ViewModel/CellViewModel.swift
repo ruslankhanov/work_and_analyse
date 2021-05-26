@@ -14,8 +14,6 @@ protocol CellViewModel: class {
     var subtitle: String { get }
     
     var rightDetailText: String { get }
-    
-    var isCompleted: Bool { get }
 }
 
 extension CellViewModel {

@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct SettingElementViewModel {
+struct TitledClosure {
     var title: String
-    var isEnabled: Bool
     var action: () -> Void
 }

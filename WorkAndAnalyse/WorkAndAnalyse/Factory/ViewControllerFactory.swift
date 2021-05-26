@@ -42,4 +42,9 @@ class ViewControllerFactory {
         let viewController = SettingsViewController()
         return viewController
     }
+    
+    func instantiateStatsViewController() -> StatsViewController {
+        let viewController = StatsViewController()
+        return viewController
+    }
 }

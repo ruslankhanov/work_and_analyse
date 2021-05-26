@@ -47,11 +47,8 @@ class SettingsViewController: BaseViewController {
             }
         }
     }
-
 }
 
 extension SettingsViewController: SettingsViewModelDelegate {
-    func showAlert(title: String, message: String) {
-        showAlert(title: title, message: message)
-    }
+
 }

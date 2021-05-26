@@ -13,6 +13,7 @@ enum TasksType: String {
     case next = "Next tasks"
     case missing = "Missing"
     case history = ""
+    case all = "All"
     
     var filterStatement: FilterStatement {
         switch self {
@@ -22,6 +23,8 @@ enum TasksType: String {
             return { $0.endTime < Date() && !$0.completed }
         case .history:
             return { $0.completed }
+        case .all:
+            return { _ in true }
         }
     }
 }
@@ -67,7 +70,11 @@ class TaskServiceImplementation: TaskService {
         }
     }
     
-    func clearData(completion: ((Error?) -> Void)?) {
+    func clearData(completion: @escaping (Error?) -> Void) {
         repository.removeAllTasks(completion: completion)
+    }
+    
+    func getSummary(completion: @escaping (Result<[SummaryViewModel], Error>) -> Void) {
+//
     }
 }

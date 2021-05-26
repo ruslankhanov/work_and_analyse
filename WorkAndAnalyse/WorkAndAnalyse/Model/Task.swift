@@ -17,7 +17,7 @@ class Task: Codable {
         subtasks.allSatisfy { $0.completed }
     }
     
-    private var duration: TimeInterval {
+    var duration: TimeInterval {
         subtasks.map { $0.duration }.reduce(TimeInterval(0), +)
     }
     

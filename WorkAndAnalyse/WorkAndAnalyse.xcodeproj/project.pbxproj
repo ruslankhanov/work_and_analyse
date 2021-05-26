@@ -19,6 +19,7 @@
 		ED31CB4B26394D58001CDD23 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31CB4A26394D58001CDD23 /* TaskListViewController.swift */; };
 		ED31CB4E263962B8001CDD23 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31CB4D263962B8001CDD23 /* TaskViewModel.swift */; };
 		ED31CB512639646F001CDD23 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31CB502639646F001CDD23 /* TaskListViewModel.swift */; };
+		ED33E98D265EE188000E4641 /* StatsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED33E98C265EE188000E4641 /* StatsCoordinator.swift */; };
 		ED362AB12611D9A7008DB051 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED362AB02611D9A7008DB051 /* MainTabBarController.swift */; };
 		ED38745B25EBFDB5007D9A38 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */; };
 		ED38745F25ECF14D007D9A38 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */; };
@@ -85,12 +86,16 @@
 		EDFD053525FA404700B8988F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD053425FA404700B8988F /* SignUpViewModel.swift */; };
 		EDFF090D265D8267008DA975 /* CompletedTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF090C265D8267008DA975 /* CompletedTasksCoordinator.swift */; };
 		EDFF0911265D8A64008DA975 /* ClosedRange+ToIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0910265D8A64008DA975 /* ClosedRange+ToIndexPath.swift */; };
-		EDFF0916265DD467008DA975 /* SettingElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0915265DD466008DA975 /* SettingElementViewModel.swift */; };
+		EDFF0916265DD467008DA975 /* TitledClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0915265DD466008DA975 /* TitledClosure.swift */; };
 		EDFF0919265DD4D9008DA975 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0918265DD4D9008DA975 /* SettingsViewModel.swift */; };
 		EDFF091C265E5617008DA975 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF091B265E5617008DA975 /* SettingsViewController.swift */; };
 		EDFF091F265E5D4B008DA975 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF091E265E5D4B008DA975 /* SettingsCoordinator.swift */; };
 		EDFF0922265E7DD1008DA975 /* UIButton+SetColorForState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0921265E7DD1008DA975 /* UIButton+SetColorForState.swift */; };
 		EDFF0925265E83C9008DA975 /* Notification.Name+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0924265E83C9008DA975 /* Notification.Name+CustomNames.swift */; };
+		EDFF092F265ECA1D008DA975 /* SegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF092E265ECA1D008DA975 /* SegmentViewModel.swift */; };
+		EDFF0934265ECA85008DA975 /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0933265ECA85008DA975 /* StatsViewModel.swift */; };
+		EDFF0938265ED1E7008DA975 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF0937265ED1E7008DA975 /* SummaryViewModel.swift */; };
+		EDFF093B265ED384008DA975 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF093A265ED384008DA975 /* StatsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +113,7 @@
 		ED31CB4A26394D58001CDD23 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		ED31CB4D263962B8001CDD23 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		ED31CB502639646F001CDD23 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
+		ED33E98C265EE188000E4641 /* StatsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCoordinator.swift; sourceTree = "<group>"; };
 		ED362AB02611D9A7008DB051 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		ED38745A25EBFDB5007D9A38 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		ED38745E25ECF14D007D9A38 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -176,12 +182,16 @@
 		EDFD053425FA404700B8988F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		EDFF090C265D8267008DA975 /* CompletedTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksCoordinator.swift; sourceTree = "<group>"; };
 		EDFF0910265D8A64008DA975 /* ClosedRange+ToIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosedRange+ToIndexPath.swift"; sourceTree = "<group>"; };
-		EDFF0915265DD466008DA975 /* SettingElementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingElementViewModel.swift; sourceTree = "<group>"; };
+		EDFF0915265DD466008DA975 /* TitledClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledClosure.swift; sourceTree = "<group>"; };
 		EDFF0918265DD4D9008DA975 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		EDFF091B265E5617008DA975 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EDFF091E265E5D4B008DA975 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		EDFF0921265E7DD1008DA975 /* UIButton+SetColorForState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetColorForState.swift"; sourceTree = "<group>"; };
 		EDFF0924265E83C9008DA975 /* Notification.Name+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+CustomNames.swift"; sourceTree = "<group>"; };
+		EDFF092E265ECA1D008DA975 /* SegmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentViewModel.swift; sourceTree = "<group>"; };
+		EDFF0933265ECA85008DA975 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		EDFF0937265ED1E7008DA975 /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
+		EDFF093A265ED384008DA975 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +239,8 @@
 				ED409F4B2659A52300BD9797 /* CellViewModel.swift */,
 				ED409F51265AA68800BD9797 /* CellType.swift */,
 				ED409F6D265B642500BD9797 /* SubtaskViewModel.swift */,
-				EDFF0915265DD466008DA975 /* SettingElementViewModel.swift */,
+				EDFF092E265ECA1D008DA975 /* SegmentViewModel.swift */,
+				EDFF0937265ED1E7008DA975 /* SummaryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -379,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3EF8FF260CA4DB00C41119 /* Task.swift */,
+				EDFF0915265DD466008DA975 /* TitledClosure.swift */,
 				ED409F74265D2CA800BD9797 /* ViewModel */,
 			);
 			path = Model;
@@ -511,6 +523,7 @@
 		EDF5F32025F91F16007CD5C1 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EDFF0932265ECA6D008DA975 /* Stats */,
 				EDFF0913265DD21B008DA975 /* Settings */,
 				ED409F7C265D6D8600BD9797 /* TaskLIst */,
 				EDF5F32125F92000007CD5C1 /* Authorization */,
@@ -576,6 +589,16 @@
 				EDFF091E265E5D4B008DA975 /* SettingsCoordinator.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		EDFF0932265ECA6D008DA975 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				EDFF0933265ECA85008DA975 /* StatsViewModel.swift */,
+				EDFF093A265ED384008DA975 /* StatsViewController.swift */,
+				ED33E98C265EE188000E4641 /* StatsCoordinator.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -700,6 +723,7 @@
 				ED4F875925E7F033008117AB /* BaseViewController.swift in Sources */,
 				ED4CF2072659A45000FA689C /* SectionViewModel.swift in Sources */,
 				ED3EF90B260CBF6500C41119 /* CreateTaskViewModel.swift in Sources */,
+				EDFF0934265ECA85008DA975 /* StatsViewModel.swift in Sources */,
 				ED31CB4426394BEF001CDD23 /* MyTasksCoordinator.swift in Sources */,
 				ED268F6526359742006AFDDD /* PickerViewCell.swift in Sources */,
 				ED3EF900260CA4DB00C41119 /* Task.swift in Sources */,
@@ -712,10 +736,12 @@
 				ED409F58265B207200BD9797 /* UIImage+Resize.swift in Sources */,
 				ED409F68265B4F2200BD9797 /* OutlinedCell.swift in Sources */,
 				ED4ADB3F25E7EE1F00935A90 /* AppDelegate.swift in Sources */,
+				EDFF092F265ECA1D008DA975 /* SegmentViewModel.swift in Sources */,
+				EDFF093B265ED384008DA975 /* StatsViewController.swift in Sources */,
 				EDAC85E326024F7400F6D871 /* TaskCreationCoordinator.swift in Sources */,
 				EDEAE28926389E890010FDFE /* TaskServiceImplementation.swift in Sources */,
 				ED820072260F57D800B89F80 /* ApplicationCoordinator.swift in Sources */,
-				EDFF0916265DD467008DA975 /* SettingElementViewModel.swift in Sources */,
+				EDFF0916265DD467008DA975 /* TitledClosure.swift in Sources */,
 				ED268F742635F1B5006AFDDD /* DatePickerCell.swift in Sources */,
 				ED409F52265AA68800BD9797 /* CellType.swift in Sources */,
 				EDAC85CC2600FD4200F6D871 /* SignInViewModel.swift in Sources */,
@@ -732,11 +758,13 @@
 				EDFD053225FA3E2100B8988F /* AuthErrorCode+LocalizedDescription.swift in Sources */,
 				ED409F65265B4C2300BD9797 /* OutlinedView.swift in Sources */,
 				ED820080260F5CA600B89F80 /* ViewControllerFactory.swift in Sources */,
+				ED33E98D265EE188000E4641 /* StatsCoordinator.swift in Sources */,
 				ED820088260F8F3400B89F80 /* CoordinatorFinishOutput.swift in Sources */,
 				ED31CB512639646F001CDD23 /* TaskListViewModel.swift in Sources */,
 				ED4FA65D25E82EF200C6E04D /* CustomFonts.swift in Sources */,
 				EDFF0925265E83C9008DA975 /* Notification.Name+CustomNames.swift in Sources */,
 				ED4FA66225E8317400C6E04D /* SignInViewController.swift in Sources */,
+				EDFF0938265ED1E7008DA975 /* SummaryViewModel.swift in Sources */,
 				EDEAE26F26377B050010FDFE /* DetailTextViewCell.swift in Sources */,
 				EDEAE277263875560010FDFE /* TaskRepository.swift in Sources */,
 				ED77B7CF25F4A19E000BFF44 /* AuthCoordinator.swift in Sources */,

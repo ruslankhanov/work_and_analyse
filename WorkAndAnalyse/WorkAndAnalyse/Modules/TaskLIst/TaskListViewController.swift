@@ -197,6 +197,8 @@ extension TaskListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let element = dataToPresent[indexPath.section].cells[indexPath.row]
         
+        
+        
         let action = UIContextualAction(style: .normal,
                                         title: nil) { [weak self] (action, view, completionHandler) in
             guard let self = self else { return }
@@ -205,7 +207,17 @@ extension TaskListViewController: UITableViewDelegate {
             completionHandler(true)
         }
         
-        if element.isCompleted {
+        var isCompleted = false
+        
+        if let model = element as? SubtaskViewModel {
+            isCompleted = model.isCompleted
+        }
+        
+        if let model = element as? TaskViewModel {
+            isCompleted = model.isCompleted
+        }
+        
+        if isCompleted {
             action.image = #imageLiteral(resourceName: "close").imageResized(to: CGSize(width: 40,height: 40))
         } else {
             action.image = #imageLiteral(resourceName: "check-mark-2").imageResized(to: CGSize(width: 40,height: 40))

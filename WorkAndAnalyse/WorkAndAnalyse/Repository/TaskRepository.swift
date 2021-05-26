@@ -11,5 +11,5 @@ protocol TaskRepository {
     func removeTask(_ task: Task, completion: @escaping (Error?) -> Void)
     func updateTask(_ task: Task, completion: @escaping (Error?) -> Void)
     
-    func removeAllTasks(completion: ((Error?) -> Void)?)
+    func removeAllTasks(completion: @escaping (Error?) -> Void)
 }

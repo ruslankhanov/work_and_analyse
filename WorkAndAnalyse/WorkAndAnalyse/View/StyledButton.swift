@@ -40,7 +40,7 @@ class StyledButton: UIButton {
     }
     
     override func setTitle(_ title: String?, for state: UIControl.State) {
-        let attributedString = NSAttributedString(string: title ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: CustomFonts.openSans(size: 25, style: .bold)])
+        let attributedString = NSAttributedString(string: title ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: CustomFonts.openSans(size: 25, style: .semibold)])
         super.setAttributedTitle(attributedString, for: state)
     }
 

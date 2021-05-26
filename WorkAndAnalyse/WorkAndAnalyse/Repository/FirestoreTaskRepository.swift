@@ -99,7 +99,7 @@ class FirestoreTaskRepository: TaskRepository {
         }
     }
     
-    func removeAllTasks(completion: ((Error?) -> Void)?) {
+    func removeAllTasks(completion: @escaping (Error?) -> Void) {
         let batchSize = 100
         
         guard let uid = currentUser?.uid else {
@@ -112,17 +112,17 @@ class FirestoreTaskRepository: TaskRepository {
         
         documentRef.getDocuments { [weak self] querySnapshot, error in
             guard error == nil else {
-                completion?(error!)
+                completion(error!)
                 return
             }
             
             let batch = documentRef.firestore.batch()
             querySnapshot?.documents.forEach { batch.deleteDocument($0.reference) }
             
-            completion?(nil)
+            completion(nil)
             
             batch.commit {_ in
-                self?.removeAllTasks(completion: nil)
+                self?.removeAllTasks(completion: {_ in } )
             }
         }
     }
