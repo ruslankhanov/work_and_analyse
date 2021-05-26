@@ -44,10 +44,10 @@ class DatePickerCell: UITableViewCell, ConfigurableCell {
         
         containerView.snp.makeConstraints { make in
             make.height.equalTo(60)
-            make.topMargin.equalToSuperview().offset(5)
-            make.bottomMargin.equalToSuperview().offset(-5)
-            make.leadingMargin.equalToSuperview().offset(16)
-            make.trailingMargin.equalToSuperview().offset(-16)
+            make.top.equalToSuperview().offset(5)
+            make.bottom.equalToSuperview().offset(-5)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().offset(-25)
         }
         
         datePicker.snp.makeConstraints { make in

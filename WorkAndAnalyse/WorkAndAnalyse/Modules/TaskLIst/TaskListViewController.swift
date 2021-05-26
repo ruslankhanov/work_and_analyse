@@ -9,9 +9,33 @@ import UIKit
 
 class TaskListViewController: BaseViewController {
     
+    enum State {
+        case noData
+        case loadingData
+        case hasData
+    }
+    
     // MARK: - Vars & Lets
     
     var viewModel: TaskListViewModelProtocol!
+    
+    private lazy var state: State = .loadingData {
+        didSet {
+            switch state {
+            case .noData:
+                tableView.isHidden = true
+                noDataLabel.isHidden = false
+            case .hasData:
+                tableView.isHidden = false
+                noDataLabel.isHidden = true
+                activityIndicatorView.isHidden = true
+            case .loadingData:
+                tableView.isHidden = true
+                noDataLabel.isHidden = true
+                activityIndicatorView.isHidden = false
+            }
+        }
+    }
     
     private var dataToPresent: [SectionViewModel] {
         viewModel.dataToPresent
@@ -23,6 +47,19 @@ class TaskListViewController: BaseViewController {
         return tableView
     }()
     
+    private lazy var noDataLabel: UILabel = {
+        let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: view.frame.height)))
+        label.text = viewModel.noDataText
+        label.textColor = .white
+        label.font = CustomFonts.openSans(size: 18, style: .regular)
+        label.textAlignment = .center
+        label.baselineAdjustment = .alignCenters
+        return label
+    }()
+    
+    private let activityIndicatorView = UIActivityIndicatorView(style: .large)
+    private let refreshControl = UIRefreshControl()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -30,6 +67,10 @@ class TaskListViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.hidesBarsOnSwipe = true
         
+        configureRefreshing()
+        configureActivityIndicator()
+        
+        view.addSubview(noDataLabel)
         view.addSubview(tableView)
         
         // Configure table view
@@ -42,17 +83,56 @@ class TaskListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        loadData()
+    }
+    
+    // MARK: - Private methods
+    
+    private func loadData() {
+        viewModel.removeData()
         viewModel.loadDataToPresent()
+    }
+    
+    private func configureActivityIndicator() {
+        activityIndicatorView.color = .white
+        
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+    }
+    
+    private func configureRefreshing() {
+        refreshControl.tintColor = .white
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc private func refresh() {
+        loadData()
+        reloadData()
+    }
+    
+    private func reloadData() {
+        tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }
 extension TaskListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        dataToPresent.count
+        if case .noData = state {
+            return 0
+        }
+        return dataToPresent.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataToPresent[section].cells.count
+        if case .noData = state {
+            return 0
+        }
+        return dataToPresent[section].cells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,11 +159,19 @@ extension TaskListViewController: UITableViewDataSource {
 extension TaskListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        LabelSectionHeaderView.getView(with: viewModel.dataToPresent[section].title ?? "")
+        if let title = viewModel.dataToPresent[section].title, title != "" {
+            return LabelSectionHeaderView.getView(with: title)
+        } else {
+            return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        50.0
+        if let title = viewModel.dataToPresent[section].title, title != "" {
+            return 50.0
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -136,10 +224,18 @@ extension TaskListViewController: TaskListViewModelDelegate {
     }
     
     func didLoadData() {
-        tableView.reloadData()
+        state = viewModel.isDataEmpty ? .noData : .hasData
+        reloadData()
+        activityIndicatorView.stopAnimating()
     }
     
     func didUpdateData(at indexPaths: [IndexPath]) {
         tableView.reloadRows(at: indexPaths, with: .left)
+        state = viewModel.isDataEmpty ? .noData : .hasData
+    }
+    
+    func willLoadData() {
+        state = .loadingData
+        activityIndicatorView.startAnimating()
     }
 }

@@ -49,8 +49,8 @@ class DetailTextViewCell: UITableViewCell, ConfigurableCell {
     
         defaultView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().offset(-25)
             make.bottom.equalToSuperview().offset(-5)
         }
         

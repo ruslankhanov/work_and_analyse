@@ -42,8 +42,8 @@ class LabelSectionHeaderView: UIView {
     private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(15)
-            make.trailing.equalToSuperview().offset(-15)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().offset(-25)
         }
     }
 }

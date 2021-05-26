@@ -10,30 +10,40 @@ import Foundation
 class TaskListViewModel: TaskListViewModelProtocol {
     
     // MARK: - Vars & Lets
-    var dataToPresent: [SectionViewModel] = []
+    var dataToPresent: [SectionViewModel]
+    var noDataText = ""
+    
+    var isDataEmpty: Bool {
+        dataToPresent.allSatisfy { $0.cells.isEmpty }
+    }
+    
     weak var delegate: TaskListViewModelDelegate?
     
     private let taskService: TaskService
     private let taskTypes: [TasksType]
-    
-    private var tasks: [Task] = []
-    
+        
     // MARK: - Init
     init(taskService: TaskService, taskTypes: [TasksType]) {
         self.taskService = taskService
         self.taskTypes = taskTypes
+        dataToPresent = []
     }
     
     // MARK: - Public methods
     
     func loadDataToPresent() {
-        dataToPresent = []
+        delegate?.willLoadData()
         for type in taskTypes {
             taskService.loadTasks(type: type) { [weak self] response in
                 guard let self = self else { return }
                 self.loadTasks(response: response, title: type.rawValue)
             }
         }
+    }
+    
+    func removeData() {
+        dataToPresent = []
+        delegate?.didLoadData()
     }
     
     func updateTask(with model: CellViewModel, at indexPath: IndexPath) {

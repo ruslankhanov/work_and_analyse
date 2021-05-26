@@ -12,7 +12,7 @@ enum TasksType: String {
     
     case next = "Next tasks"
     case missing = "Missing"
-    case history = "Completed tasks"
+    case history = ""
     
     var filterStatement: FilterStatement {
         switch self {

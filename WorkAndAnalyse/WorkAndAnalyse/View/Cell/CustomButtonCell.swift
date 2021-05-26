@@ -69,9 +69,9 @@ class CustomButtonCell: UITableViewCell, ConfigurableCell {
         mainButton.snp.makeConstraints { make in
             make.topMargin.equalToSuperview().offset(5)
             make.height.equalTo(60)
-            make.bottomMargin.equalToSuperview().offset(-5)
-            make.leadingMargin.equalToSuperview().offset(16)
-            make.trailingMargin.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-5)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().offset(-25)
         }
     }
     

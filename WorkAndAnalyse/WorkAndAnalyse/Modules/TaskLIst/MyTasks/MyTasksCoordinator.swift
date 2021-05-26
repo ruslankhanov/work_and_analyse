@@ -41,6 +41,7 @@ class MyTasksCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         
         let viewModel = TaskListViewModel(taskService: TaskServiceImplementation(repository: FirestoreTaskRepository()), taskTypes: [.missing, .next])
         viewModel.delegate = viewController
+        viewModel.noDataText = "No tasks to complete :("
         
         viewController.viewModel = viewModel
         router.setRootModule(viewController)
